@@ -58,6 +58,7 @@ exports.getServices = (req, res) => {
     const sql = `
         SELECT *
         FROM SERVICE_MENU
+        WHERE active_flag = TRUE
         ORDER BY service_name
     `;
 
@@ -84,7 +85,7 @@ exports.getService = (req, res) => {
     const sql = `
         SELECT *
         FROM SERVICE_MENU
-        WHERE service_id = ?
+        WHERE service_id = ? AND active_flag = TRUE
     `;
 
     db.query(sql, [id], (err, results) => {
@@ -133,7 +134,7 @@ exports.updateService = (req, res) => {
             duration_minutes = ?,
             category = ?,
             active_flag = ?
-        WHERE service_id = ?
+        WHERE service_id = ? AND active_flag = TRUE
     `;
 
     db.query(
@@ -147,11 +148,17 @@ exports.updateService = (req, res) => {
             active_flag,
             id
         ],
-        (err) => {
+        (err, result) => {
 
             if (err) {
                 return res.status(500).json({
                     error: err.message
+                });
+            }
+
+            if (result.affectedRows === 0) {
+                return res.status(404).json({
+                    message: "Service not found"
                 });
             }
 
@@ -173,14 +180,20 @@ exports.deleteService = (req, res) => {
     const sql = `
         UPDATE SERVICE_MENU
         SET active_flag = FALSE
-        WHERE service_id = ?
+        WHERE service_id = ? AND active_flag = TRUE
     `;
 
-    db.query(sql, [id], (err) => {
+    db.query(sql, [id], (err, result) => {
 
         if (err) {
             return res.status(500).json({
                 error: err.message
+            });
+        }
+
+        if (result.affectedRows === 0) {
+            return res.status(404).json({
+                message: "Service not found"
             });
         }
 
@@ -189,5 +202,4 @@ exports.deleteService = (req, res) => {
         });
 
     });
-
 };

@@ -67,7 +67,22 @@ exports.createPet = (req, res) => {
 // Get all pets
 exports.getPets = (req, res) => {
     const owner_id = req.user.owner_id;
-    const sql = "SELECT * FROM PET WHERE owner_id = ? AND active_flag = TRUE ORDER BY pet_name ASC;";
+    const sql = `SELECT
+                    pet_id,
+                    pet_name,
+                    species,
+                    breed,
+                    gender,
+                    birth_date,
+                    weight,
+                    size,
+                    color,
+                    vaccination_status,
+                    vaccination_proof_url,
+                    photo_url
+                FROM PET
+                WHERE owner_id = ?
+                AND active_flag = TRUE;`;
 
     db.query(sql, [owner_id], (err, results) => {
         if (err) {
@@ -86,7 +101,23 @@ exports.getPetById = (req, res) => {
     const { id } = req.params;
 
     const sql =
-        "SELECT * FROM PET WHERE pet_id = ? AND owner_id = ? AND active_flag = TRUE;";
+        `SELECT 
+            pet_id,
+            pet_name,
+            species,
+            breed,
+            gender,
+            birth_date,
+            weight,
+            size,
+            color,
+            vaccination_status,
+            vaccination_proof_url,
+            photo_url 
+        FROM PET 
+        WHERE pet_id = ? 
+        AND owner_id = ? 
+        AND active_flag = TRUE;`;
 
     db.query(sql,[id, owner_id],(err,results)=>{
 
@@ -180,7 +211,7 @@ exports.deletePet = (req, res) => {
     const {id} = req.params;
     const owner_id = req.user.owner_id;
 
-    const sql = "UPDATE PET SET active_flag = FALSE WHERE pet_id = ? AND owner_id = ?";
+    const sql = "UPDATE PET SET active_flag = FALSE, updated_at = NOW() WHERE pet_id = ? AND owner_id = ?";
 
     db.query(sql, [id, owner_id], (err, result) => {
         if (err) {
