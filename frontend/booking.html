@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pet Grooming Appointment</title>
+
+    <link rel="stylesheet" href="booking.css">
+
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+</head>
+<body>
+
+<div class="main-container">
+
+    <div class="left-panel">
+
+        <div>
+            <div class="logo-area">
+                <i class="fa-solid fa-paw"></i> Pawlendar
+
+            </div>
+
+            <h1 class="welcome-text">
+                Book Your Pet's Grooming Appointment
+            </h1>
+
+            <p class="sub-text">
+                Schedule your furry friend's grooming session in just a few
+                clicks. Choose your preferred service, date, and time.
+            </p>
+        </div>
+
+        <div class="image-wrapper">
+            <img src="images/bunny.jpg" alt="Cute bunny">
+        </div>
+
+    </div>
+
+    <div class="right-panel">
+
+        <div class="form-box">
+
+            <h2 class="form-title">Booking Form</h2>
+            <p class="form-subtitle">
+                Fill in the details below.
+            </p>
+
+            <form>
+
+                <div class="form-row">
+            
+                    <div class="input-group">
+                        <label>Owner Name</label>
+                        <input type="text" placeholder="Enter your full name">
+                    </div>
+            
+                    <div class="input-group">
+                        <label>Phone Number</label>
+                        <input type="tel" placeholder="Enter your phone number">
+                    </div>
+            
+                </div>
+            
+                <div class="form-row">
+            
+                    <div class="input-group">
+                        <label>Email</label>
+                        <input type="email" placeholder="Enter your email">
+                    </div>
+            
+                    <div class="input-group">
+                        <label>Address</label>
+                        <input type="text" placeholder="Enter your address">
+                    </div>
+            
+                </div>
+            
+                <div class="form-row">
+            
+                    <div class="input-group">
+                        <label>Pet Name</label>
+                        <input type="text" placeholder="Enter your pet's name">
+                    </div>
+            
+                    <div class="input-group">
+                        <label>Pet Type</label>
+            
+                        <select id="petType" onchange="showOtherPet()">
+                            <option>Select Pet Type</option>
+                            <option>Dog</option>
+                            <option>Cat</option>
+                            <option>Rabbit</option>
+                            <option>Bird</option>
+                            <option>Other</option>
+                        </select>
+                    </div>
+            
+                </div>
+            
+                <div class="input-group" id="otherPetGroup" style="display:none;">
+                    <label>Please specify</label>
+                    <input type="text" placeholder="Enter pet type">
+                </div>
+            
+                <div class="form-row">
+            
+                    <div class="input-group">
+                        <label>Service</label>
+            
+                        <select>
+                            <option>Bath & Brush Essential</option>
+                            <option>Haircut</option>
+                            <option>Full Grooming</option>
+                            <option>Nail Trim</option>
+                        </select>
+                    </div>
+            
+                    <div class="input-group">
+                        <label>Breed</label>
+                        <input type="text" placeholder="Golden Retriever">
+                    </div>
+            
+                </div>
+            
+                <div class="form-row">
+            
+                    <div class="input-group">
+                        <label>Appointment Date</label>
+                        <input type="date">
+                    </div>
+            
+                    <div class="input-group">
+                        <label>Appointment Time</label>
+                        <input type="time">
+                    </div>
+            
+                </div>
+            
+                <div class="input-group">
+                    <label>Special Instructions</label>
+                    <textarea placeholder="Anything we should know?"></textarea>
+                </div>
+            
+                <button class="btn-login">
+                    Book Appointment
+                </button>
+            
+            </form>
+        </div>
+
+    </div>
+
+</div>
+    <script>
+    function showOtherPet() {
+        const petType = document.getElementById("petType").value;
+        const otherPetGroup = document.getElementById("otherPetGroup");
+
+        if (petType === "Other") {
+            otherPetGroup.style.display = "block";
+        } else {
+            otherPetGroup.style.display = "none";
+            document.getElementById("otherPet").value = "";
+        }
+    }
+    </script>
+</body>
+</html>

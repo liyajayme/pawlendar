@@ -22,7 +22,7 @@ body{
     display:flex;
     border-radius:35px;
     overflow:hidden;
-    box-shadow:0 15px 40px rgba(74,35,40,0.12);
+    box-shadow: 0 15px 35px rgba(43, 27, 12, 0.15);
 
 }
 
