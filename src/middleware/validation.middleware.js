@@ -63,39 +63,3 @@ module.exports.validateLogin = (req, res, next) => {
 
   next();
 };
-
-//PET VALIDATION
-module.exports.validatePet = (req, res, next) => {
-    const {
-        pet_name,
-        species,
-        breed,
-        gender,
-        weight
-    } = req.body;
-
-    if (
-        !pet_name ||
-        !species ||
-        !breed ||
-        !gender
-    ) {
-        return res.status(400).json({
-            message: "Required pet information is missing"
-        });
-    }
-
-    if (!["M", "F"].includes(gender)) {
-        return res.status(400).json({
-            message: "Invalid gender"
-        });
-    }
-
-    if (weight !== undefined && weight <= 0) {
-        return res.status(400).json({
-            message: "Weight must be greater than 0"
-        });
-    }
-
-    next();
-};
