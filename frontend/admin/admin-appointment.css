@@ -1,0 +1,132 @@
+/* ===========================
+   APPOINTMENT STATUS PAGE
+=========================== */
+@import url("../styles.css");
+
+.appointments-dashboard{
+    padding:80px 120px;
+}
+
+.appointments-dashboard h2{
+    text-align:center;
+    font-size:38px;
+    color:#4A2328;
+    margin-bottom:45px;
+}
+
+.appointments-grid{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(300px,1fr));
+    gap:30px;
+}
+
+/* CARD */
+
+.appointment-card{
+    background:white;
+    border-radius:25px;
+    border-top:6px solid #C1EBE9;
+    box-shadow:0 10px 25px rgba(74,35,40,.05);
+    padding:30px;
+    transition:.3s ease;
+}
+
+.appointment-card:hover{
+    transform:translateY(-8px);
+    box-shadow:0 18px 35px rgba(74,35,40,.12);
+}
+
+.appointment-card h3{
+    color:#4A2328;
+    margin-bottom:20px;
+    font-size:24px;
+}
+
+/* STATUS */
+
+.appointment-card p{
+    font-size:17px;
+    color:#5C3338;
+    margin-bottom:25px;
+    font-weight:500;
+}
+
+/* BUTTON */
+
+.appointment-card button{
+
+    width:100%;
+    padding:15px;
+
+    border:none;
+    border-radius:30px;
+
+    background:#F5AC53;
+    color:#4A2328;
+
+    font-size:16px;
+    font-weight:600;
+
+    cursor:pointer;
+    transition:.3s ease;
+}
+
+.appointment-card button:hover:not(:disabled){
+    background:#E0943A;
+    transform:translateY(-2px);
+}
+
+.appointment-card button:disabled{
+    background:#D9D9D9;
+    color:#777;
+    cursor:not-allowed;
+}
+
+/* Optional colored status badge */
+
+.status-badge{
+    display:inline-block;
+    padding:8px 16px;
+    border-radius:999px;
+    font-size:14px;
+    font-weight:600;
+}
+
+.scheduled{
+    background:#FFF4D2;
+    color:#A87400;
+}
+
+.checked-in{
+    background:#D8F2FF;
+    color:#0A6288;
+}
+
+.in-progress{
+    background:#FFE2C7;
+    color:#B86400;
+}
+
+.ready{
+    background:#D8F7DD;
+    color:#2C7A4B;
+}
+
+.completed{
+    background:#E8E8E8;
+    color:#666;
+}
+
+/* Mobile */
+
+@media(max-width:900px){
+
+    .appointments-dashboard{
+        padding:60px 30px;
+    }
+
+    .appointments-dashboard h2{
+        font-size:32px;
+    }
+
+}

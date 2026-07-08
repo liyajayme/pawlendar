@@ -11,17 +11,13 @@ exports.register = async (req, res) => {
             last_name,
             phone_number,
             email,
-            street_address,
-            barangay,
-            city,
-            province,
             password
         } = req.body;
 
         db.query(
             `
             SELECT email, phone_number
-            FROM owner
+            FROM user
             WHERE email = ? OR phone_number = ?
             `,
             [email, phone_number],
@@ -34,11 +30,11 @@ exports.register = async (req, res) => {
                 }
 
                 const emailExists = existing.some(
-                    owner => owner.email === email
+                    user => user.email === email
                 );
 
                 const phoneExists = existing.some(
-                    owner => owner.phone_number === phone_number
+                    user => user.phone_number === phone_number
                 );
 
                 if (emailExists) {
@@ -58,30 +54,22 @@ exports.register = async (req, res) => {
 
                 db.query(
                     `
-                    INSERT INTO owner
+                    INSERT INTO user
                     (
                     first_name,
                     last_name,
                     phone_number,
                     email,
-                    street_address,
-                    barangay,
-                    city,
-                    province,
                     password
                     )
                     VALUES
-                    (?, ?, ?, ?, ?, ?, ?, ?, ?)
+                    (?, ?, ?, ?, ?)
                     `,
                     [
                         first_name,
                         last_name,
                         phone_number,
                         email,
-                        street_address,
-                        barangay,
-                        city,
-                        province,
                         hashedPassword
                     ],
                     (err, result) => {
@@ -94,7 +82,8 @@ exports.register = async (req, res) => {
 
                         res.status(201).json({
                             message: "Registered successfully",
-                            owner_id: result.insertId
+                            user_id: result.insertId,
+                            role: "Customer"
                         });
 
                     }
@@ -125,12 +114,12 @@ exports.login = async (req, res) => {
         db.query(
             `
             SELECT *
-            FROM owner
+            FROM user
             WHERE email = ?
             AND active_flag = TRUE
             `,
             [email],
-            async (err, owners) => {
+            async (err, users) => {
 
                 if (err) {
                     return res.status(500).json({
@@ -138,18 +127,18 @@ exports.login = async (req, res) => {
                     });
                 }
 
-                if (owners.length === 0) {
+                if (users.length === 0) {
                     return res.status(400).json({
                         message: "Invalid email or password"
                     });
                 }
 
-                const owner = owners[0];
+                const user = users[0];
 
                 const match =
                     await bcrypt.compare(
                         password,
-                        owner.password
+                        user.password
                     );
 
                 if (!match) {
@@ -159,11 +148,17 @@ exports.login = async (req, res) => {
                 }
 
                 const token =
-                    generateToken(owner);
+                    generateToken(user);
 
                 res.json({
                     message: "Login successful",
-                    token
+                    token,
+                    user:{
+                        user_id:user.user_id,
+                        first_name:user.first_name,
+                        last_name:user.last_name,
+                        role:user.role
+                    }
                 });
 
             }

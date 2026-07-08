@@ -2,7 +2,7 @@ const db = require("../config/db");
 
 // Create Pet
 exports.createPet = (req, res) => {
-    const owner_id = req.user.owner_id;
+    const user_id = req.user.user_id;
     const {
         pet_name,
         species,
@@ -19,7 +19,7 @@ exports.createPet = (req, res) => {
     const sql = `
         INSERT INTO pet
         (
-            owner_id,
+            user_id,
             pet_name,
             species,
             breed,
@@ -37,7 +37,7 @@ exports.createPet = (req, res) => {
     db.query(
         sql,
         [
-            owner_id,
+            user_id,
             pet_name,
             species,
             breed,
@@ -66,7 +66,7 @@ exports.createPet = (req, res) => {
 
 // Get all pets
 exports.getPets = (req, res) => {
-    const owner_id = req.user.owner_id;
+    const user_id = req.user.user_id;
     const sql = `SELECT
                     pet_id,
                     pet_name,
@@ -81,10 +81,10 @@ exports.getPets = (req, res) => {
                     vaccination_proof_url,
                     photo_url
                 FROM pet
-                WHERE owner_id = ?
+                WHERE user_id = ?
                 AND active_flag = TRUE;`;
 
-    db.query(sql, [owner_id], (err, results) => {
+    db.query(sql, [user_id], (err, results) => {
         if (err) {
             return res.status(500).json({
                 error: err.message
@@ -97,7 +97,7 @@ exports.getPets = (req, res) => {
 
 exports.getPetById = (req, res) => {
 
-    const owner_id = req.user.owner_id;
+    const user_id = req.user.user_id;
     const { id } = req.params;
 
     const sql =
@@ -116,10 +116,10 @@ exports.getPetById = (req, res) => {
             photo_url 
         FROM pet 
         WHERE pet_id = ? 
-        AND owner_id = ? 
+        AND user_id = ? 
         AND active_flag = TRUE;`;
 
-    db.query(sql,[id, owner_id],(err,results)=>{
+    db.query(sql,[id, user_id],(err,results)=>{
 
         if(err){
             return res.status(500).json({
@@ -140,7 +140,7 @@ exports.getPetById = (req, res) => {
 };
 
 exports.updatePet = (req, res) => {
-    const owner_id = req.user.owner_id;
+    const user_id = req.user.user_id;
     const {id} = req.params;
     const {
         pet_name,
@@ -167,7 +167,7 @@ exports.updatePet = (req, res) => {
             color = ?,
             vaccination_proof_url = ?,
             photo_url = ?
-        WHERE pet_id = ? AND owner_id = ?
+        WHERE pet_id = ? AND user_id = ?
         `;
 
     db.query(
@@ -184,7 +184,7 @@ exports.updatePet = (req, res) => {
             vaccination_proof_url,
             photo_url,
             id,
-            owner_id
+            user_id
         ],
         (err, result) => {
             if (err) {
@@ -209,11 +209,11 @@ exports.updatePet = (req, res) => {
 // Delete Pet
 exports.deletePet = (req, res) => {
     const {id} = req.params;
-    const owner_id = req.user.owner_id;
+    const user_id = req.user.user_id;
 
-    const sql = "UPDATE pet SET active_flag = FALSE, updated_at = NOW() WHERE pet_id = ? AND owner_id = ?";
+    const sql = "UPDATE pet SET active_flag = FALSE, updated_at = NOW() WHERE pet_id = ? AND user_id = ?";
 
-    db.query(sql, [id, owner_id], (err, result) => {
+    db.query(sql, [id, user_id], (err, result) => {
         if (err) {
             return res.status(500).json({
                 error: err.message

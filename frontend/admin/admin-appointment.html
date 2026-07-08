@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pawlendar | Grooming Status</title>
+
+    <link rel="stylesheet" href="admin-appointment.css">
+</head>
+<body>
+
+    <header>
+        <nav>
+            <div class="logo">Pawlendar</div>
+
+            <ul>
+                <li><a href="admin-dashboard.html">Dashboard</a></li>
+                <li><a href="#" class="active">Appointments</a></li>
+                <li><a href="#">Customers</a></li>
+                <li><a href="#">Inventory</a></li>
+            </ul>
+
+            <button class="nav-btn">Logout</button>
+        </nav>
+    </header>
+
+    <section class="appointments-hero">
+        <div class="appointments-hero-content">
+            <h1>Appointment Status</h1>
+
+            <p>
+                Manage grooming appointments and update their progress
+                from check-in until completion.
+            </p>
+        </div>
+    </section>
+
+    <section class="appointments-dashboard">
+
+        <h2>Today's Grooming Queue</h2>
+
+        <div
+            id="appointmentContainer"
+            class="appointments-grid">
+
+        </div>
+
+    </section>
+
+    <script src="admin-appointment.js"></script>
+
+</body>
+</html>
