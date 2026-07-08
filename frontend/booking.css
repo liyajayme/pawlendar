@@ -22,10 +22,10 @@ body{
 .main-container{
     width:100%;
     max-width:1350px;
-    height:900px;
+    min-height:900px;
     border-radius:30px;
     display:flex;
-    overflow:hidden;
+    overflow:visible;
     box-shadow:0 10px 30px rgba(0,0,0,.08);
 }
 
@@ -95,22 +95,119 @@ a:hover {
 
 
 .right-panel{
-    width:55%;
+    width:72%;
     background:#fff;
     padding:40px;
     display:flex;
     justify-content:center;
-    align-items:flex-start; /* change this */
-    overflow:hidden;
+    align-items:flex-start;
+    overflow:visible;
 }
 
 .form-box{
     width:100%;
-    max-width:520px;
-    height:100%;
+    max-width:840px;
+    flex:1;
+    min-height:100%;
     display:flex;
     flex-direction:column;
-    justify-content:center;
+    justify-content:flex-start;
+    padding-left:24px;
+    border-left:4px solid #F3A953;
+}
+
+.booking-content {
+    display:flex;
+    gap:32px;
+    width:100%;
+    align-items:flex-start;
+}
+
+.availability-panel {
+    width:320px;
+    min-width:280px;
+    background:transparent;
+    border:none;
+    border-radius:0;
+    padding:0;
+    box-shadow:none;
+}
+
+.availability-panel h3 {
+    margin-bottom:18px;
+    color:#4A2E2B;
+    font-size:2rem;
+    font-weight:700;
+}
+
+.booking-divider {
+    width:4px;
+    background:#F3A953;
+    border-radius:999px;
+}
+
+.availability-controls {
+    display:flex;
+    flex-direction:column;
+    gap:12px;
+    margin-bottom:16px;
+}
+
+.availability-controls select,
+.availability-controls input {
+    width:100%;
+    padding:13px 16px;
+    border:1.5px solid #F0E4D7;
+    border-radius:12px;
+    background:#FAFAFA;
+    color:#4A2E2B;
+    font-size:.95rem;
+}
+
+.availability-controls select:focus,
+.availability-controls input:focus {
+    outline:none;
+    border-color:#EFA851;
+    background:#fff;
+}
+
+.availability-nav {
+    display:flex;
+    gap:12px;
+    margin-bottom:16px;
+}
+
+.availability-nav button {
+    flex:1;
+    border:none;
+    border-radius:12px;
+    padding:12px 0;
+    background:#F3A953;
+    color:#fff;
+    font-weight:600;
+    cursor:pointer;
+    transition:.2s;
+}
+
+.availability-nav button:hover {
+    background:#E0953F;
+}
+
+.calendar-loading,
+.calendar-message {
+    margin-bottom:12px;
+    color:#7E635F;
+    min-height:22px;
+    font-size:.9rem;
+}
+
+.calendar-container {
+    min-height:280px;
+    background:#FBF4E9;
+    border:1px solid #F0E4D7;
+    border-radius:18px;
+    padding:16px;
+    overflow:auto;
 }
 
 form {
@@ -296,6 +393,25 @@ select{
 
 .right-panel{
     padding:35px;
+}
+
+.booking-content {
+    flex-direction:column;
+}
+
+.availability-panel {
+    width:100%;
+    min-width: auto;
+}
+
+.form-box{
+    max-width:100%;
+    padding-left:0;
+    border-left:none;
+}
+
+.booking-divider {
+    display:none;
 }
 
 .form-title{

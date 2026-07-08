@@ -48,15 +48,37 @@
     </div>
 
     <div class="right-panel">
+        <div class="booking-content">
+            <aside class="availability-panel">
+                <h3>Staff Availability</h3>
+                <div class="availability-controls">
+                    <select id="calendar-view">
+                        <option value="month">Month</option>
+                        <option value="week">Week</option>
+                        <option value="day">Day</option>
+                    </select>
+                    <input type="date" id="calendar-date">
+                    <select id="calendar-groomer">
+                        <option value="">All groomers</option>
+                    </select>
+                </div>
+                <div class="availability-nav">
+                    <button type="button" id="calendar-prev">Prev</button>
+                    <button type="button" id="calendar-next">Next</button>
+                </div>
+                <div id="calendar-loading" class="calendar-loading">Loading...</div>
+                <div id="calendar-message" class="calendar-message"></div>
+                <div id="calendar-container" class="calendar-container"></div>
+            </aside>
 
-        <div class="form-box">
+            <div class="form-box">
 
-            <h2 class="form-title">Booking Form</h2>
-            <p class="form-subtitle">
-                Fill in the details below.
-            </p>
+                <h2 class="form-title">Booking Form</h2>
+                <p class="form-subtitle">
+                    Fill in the details below.
+                </p>
 
-            <form>
+                <form>
 
                 <div class="form-row">
             
@@ -119,6 +141,7 @@
                         <label>Service</label>
             
                         <select>
+                            <option>Select Service</option>
                             <option>Bath & Brush Essential</option>
                             <option>Haircut</option>
                             <option>Full Grooming</option>
@@ -161,6 +184,7 @@
 
     </div>
 
+
 </div>
     <script>
     function showOtherPet() {
@@ -175,5 +199,8 @@
         }
     }
     </script>
+    <script src="staff-calendar.js"></script>
+
+
 </body>
 </html>
