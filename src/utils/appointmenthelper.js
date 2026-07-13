@@ -25,7 +25,19 @@ exports.calculateAppointmentEnd = (serviceIds, startDatetime) => {
                 return reject(new Error("Invalid service selection."));
             }
 
-            const start = new Date(startDatetime);
+            const [date, time] = startDatetime.split(" ");
+
+            const [year, month, day] = date.split("-");
+            const [hour, minute, second] = time.split(":");
+
+            const start = new Date(
+                year,
+                month - 1,
+                day,
+                hour,
+                minute,
+                second
+            );
 
             const endDatetime = new Date(
                 start.getTime() + totalDuration * 60000
