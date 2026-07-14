@@ -13,7 +13,7 @@ exports.createGroomer = (req, res) => {
     } = req.body;
 
     const sql = `
-        INSERT INTO groomer 
+        INSERT INTO staff 
         (
             first_name,
             last_name,
@@ -69,7 +69,7 @@ exports.getGroomers = (req, res) => {
             active_flag,
             created_at,
             updated_at
-        FROM groomer
+        FROM staff
         WHERE active_flag = TRUE;
     `;
 
@@ -86,8 +86,6 @@ exports.getGroomers = (req, res) => {
     });
 
 };
-// if admin accounts should only be able to modify groomers in their own branch i'll have to add like
-// AND branch_id = ?
 
 exports.getGroomerByID = (req, res) => {
 
@@ -106,7 +104,7 @@ exports.getGroomerByID = (req, res) => {
             active_flag,
             created_at,
             updated_at
-        FROM groomer
+        FROM staff
         WHERE active_flag = TRUE;
     `;
 
@@ -130,7 +128,7 @@ exports.getGroomerByID = (req, res) => {
 
 }
 
-exports.updatePet = (req, res) => {
+exports.updateGroomer = (req, res) => {
     const {id} = req.params;
     const {
         first_name,
@@ -144,15 +142,15 @@ exports.updatePet = (req, res) => {
     } = req.body;
 
     const sql = `
-        UPDATE groomer
-            SET first_name,
-            last_name,
-            email,
-            phone_number,
-            specialization,
-            hire_date,
-            max_daily_appointments,
-            active_flag
+        UPDATE staff
+            SET first_name = ?,
+            last_name = ?,
+            email = ?,
+            phone_number = ?,
+            specialization = ?,
+            hire_date = ?,
+            max_daily_appointments = ?,
+            active_flag = ?
         WHERE staff_id = ?
         `;
 
@@ -188,10 +186,10 @@ exports.updatePet = (req, res) => {
     );
 };
 
-exports.deletePet = (req, res) => {
+exports.deactivateGroomer = (req, res) => {
     const {id} = req.params;
 
-    const sql = "UPDATE groomer SET active_flag = FALSE, updated_at = NOW() WHERE staff_id = ?";
+    const sql = "UPDATE staff SET active_flag = FALSE, updated_at = NOW() WHERE staff_id = ?";
 
     db.query(sql, [id], (err, result) => {
         if (err) {
