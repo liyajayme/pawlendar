@@ -11,18 +11,20 @@ exports.createService = (req, res) => {
         duration_minutes
     } = req.body;
 
+
     const sql = `
-        SELECT
-            service_id,
+        INSERT INTO service_menu
+        (
             service_name,
             category,
             description,
             price,
-            duration_minutes
-        FROM service_menu
-        WHERE service_id = ?
-        AND active_flag = TRUE
+            duration_minutes,
+            active_flag
+        )
+        VALUES (?, ?, ?, ?, ?, TRUE)
     `;
+
 
     db.query(
         sql,
@@ -40,6 +42,7 @@ exports.createService = (req, res) => {
                     error: err.message
                 });
             }
+
 
             res.status(201).json({
                 message: "Service created successfully",
@@ -65,7 +68,7 @@ exports.getServices = (req, res) => {
             duration_minutes
         FROM service_menu
         WHERE active_flag = TRUE
-        ORDER BY service_name
+        ORDER BY category
     `;
 
     db.query(sql, (err, results) => {

@@ -1,0 +1,316 @@
+@import url("../styles.css");
+
+/* ===========================
+   HERO
+=========================== */
+
+.services-hero{
+
+    background:linear-gradient(135deg,#FFF5E8,#FFE6C9);
+
+    padding:80px 0;
+
+}
+
+.services-content{
+
+    width:min(1200px,90%);
+
+    margin:auto;
+
+}
+
+.services-content h1{
+
+    font-size:48px;
+
+    color:#4A2328;
+
+    margin-bottom:15px;
+
+}
+
+.services-content p{
+
+    color:#6B4B4B;
+
+    font-size:18px;
+
+    margin-bottom:30px;
+
+    justify-content:space-between;
+
+}
+
+
+/* ===========================
+   BUTTON
+=========================== */
+
+.add-service-btn{
+
+    display:inline-flex;
+
+    align-items:center;
+
+    gap:12px;
+
+    padding:15px 28px;
+
+    background:#F5AC53;
+
+    color:#4A2328;
+
+    text-decoration:none;
+
+    border-radius:50px;
+
+    font-weight:700;
+
+    transition:.25s;
+
+}
+
+.add-service-btn:hover{
+
+    background:#E49A3D;
+
+    transform:translateY(-3px);
+
+}
+
+
+/* ===========================
+   MAIN CARD
+=========================== */
+
+.services-wrapper{
+
+    width:min(1400px,92%);
+
+    margin:60px auto;
+
+}
+
+.services-card{
+
+    background:white;
+
+    border-radius:25px;
+
+    padding:35px;
+
+    box-shadow:0 15px 40px rgba(74,35,40,.08);
+
+}
+
+.services-title{
+
+    display:flex;
+
+    justify-content:space-between;
+
+    align-items:center;
+
+    margin-bottom:30px;
+
+}
+
+.services-title h2{
+
+    color:#4A2328;
+
+    font-size:34px;
+
+}
+
+.services-title span{
+
+    background:#FFF1D8;
+
+    color:#A56C00;
+
+    padding:8px 18px;
+
+    border-radius:30px;
+
+    font-weight:600;
+
+}
+
+
+/* ===========================
+   TABLE
+=========================== */
+
+.services-table{
+
+    width:100%;
+
+    border-collapse:collapse;
+
+}
+
+.services-table thead{
+
+    background:#F8F4EF;
+
+}
+
+.services-table th{
+
+    padding:18px;
+
+    color:#4A2328;
+
+    text-align:left;
+
+    font-size:15px;
+
+}
+
+.services-table td{
+
+    padding:18px;
+
+    color:#5C3338;
+
+    border-bottom:1px solid #F2F2F2;
+
+    vertical-align:top;
+
+}
+
+.services-table tbody tr{
+
+    transition:.25s;
+
+}
+
+.services-table tbody tr:hover{
+
+    background:#FFF8EF;
+
+}
+
+
+/* ===========================
+   CATEGORY BADGE
+=========================== */
+
+.category{
+
+    display:inline-block;
+
+    padding:8px 14px;
+
+    background:#C1EBE9;
+
+    color:#235857;
+
+    border-radius:30px;
+
+    font-size:13px;
+
+    font-weight:600;
+
+}
+
+
+/* ===========================
+   PRICE
+=========================== */
+
+.price{
+
+    font-weight:700;
+
+    color:#D47D00;
+
+}
+
+
+/* ===========================
+   ACTIONS
+=========================== */
+
+.action-buttons{
+
+    display:flex;
+
+    gap:10px;
+
+}
+
+.edit-btn{
+
+    background:#C1EBE9;
+
+    border:none;
+
+    padding:10px 18px;
+
+    border-radius:12px;
+
+    cursor:pointer;
+
+    font-weight:600;
+
+}
+
+.edit-btn:hover{
+
+    background:#A8DDDA;
+
+}
+
+.delete-btn{
+
+    background:#FFE0E0;
+
+    border:none;
+
+    padding:10px 18px;
+
+    border-radius:12px;
+
+    cursor:pointer;
+
+    color:#A02828;
+
+    font-weight:600;
+
+}
+
+.delete-btn:hover{
+
+    background:#FFC7C7;
+
+}
+
+
+/* ===========================
+   MOBILE
+=========================== */
+
+@media(max-width:1000px){
+
+    .services-wrapper{
+
+        width:96%;
+
+    }
+
+    .services-card{
+
+        overflow:auto;
+
+    }
+
+    .services-table{
+
+        min-width:950px;
+
+    }
+
+}

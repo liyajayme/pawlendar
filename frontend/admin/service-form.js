@@ -23,45 +23,7 @@ form.addEventListener("submit", async (e) => {
 
     };
 
-    console.log(service);
-
-    // const token = localStorage.getItem("token"); temporarily removed for connection purposes
-
-    // try {
-
-    //     const response = await fetch(
-    //         "http://localhost:3000/api/services",
-    //         {
-    //             method: "POST",
-
-    //             headers: {
-    //                 "Content-Type": "application/json",
-    //                 Authorization: `Bearer ${token}`
-    //             },
-
-    //             body: JSON.stringify(service)
-    //         }
-    //     );
-
-    //     const data = await response.json();
-
-    //     if(response.ok){
-
-    //         alert(data.message);
-
-    //         form.reset();
-
-    //     }
-    //     else{
-
-    //         alert(data.message || data.error);
-
-    //     }
-    // } catch (error) {
-
-    //     alert("Cannot connect to server.");
-
-    // }
+    const token = localStorage.getItem("token"); 
 
     try {
 
@@ -69,22 +31,26 @@ form.addEventListener("submit", async (e) => {
             "http://localhost:3000/api/services",
             {
                 method: "POST",
+
                 headers: {
-                    "Content-Type": "application/json"
+                    "Content-Type": "application/json",
+                    Authorization: `Bearer ${token}`
                 },
+
                 body: JSON.stringify(service)
             }
         );
 
         const data = await response.json();
 
-        if (response.ok) {
+        if(response.ok){
 
             alert(data.message);
 
             form.reset();
 
-        } else {
+        }
+        else{
 
             alert(data.message || data.error);
 
@@ -92,6 +58,7 @@ form.addEventListener("submit", async (e) => {
     } catch (error) {
 
         alert("Cannot connect to server.");
+
     }
 });
 

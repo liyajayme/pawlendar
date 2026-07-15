@@ -17,9 +17,9 @@
 
             <ul>
                 <li><a href="admin-dashboard.html">Dashboard</a></li>
-                <li><a href="#" class="active">Appointments</a></li>
-                <li><a href="#">Customers</a></li>
-                <li><a href="#">Inventory</a></li>
+                <li><a class="active" href="admin-appointment.html">Appointments</a></li>
+                <li><a href="admin-services.html">Services</a></li>
+                <li><a href="admin-staff.html">Staff</a></li>
             </ul>
 
             <button class="nav-btn">Logout</button>
@@ -41,9 +41,30 @@
 
         <h2>Today's Grooming Queue</h2>
 
-        <div
-            id="appointmentContainer"
-            class="appointments-grid">
+        <div class="table-container">
+
+            <table class="appointment-table">
+
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Pet</th>
+                        <th>Owner</th>
+                        <th>Date</th>
+                        <th>Time</th>
+                        <th>Groomer</th>
+                        <th>Status</th>
+                        <th>Payment</th>
+                        <th>Total</th>
+                        <th>Action</th>
+                    </tr>
+                </thead>
+
+                <tbody id="appointmentTableBody">
+
+                </tbody>
+
+            </table>
 
         </div>
 
