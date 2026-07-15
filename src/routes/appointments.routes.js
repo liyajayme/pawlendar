@@ -23,4 +23,11 @@ router.put("/:id/reassign", authMiddleware, adminMiddleware, appointmentControll
 
 router.delete("/:id", authMiddleware, appointmentController.cancelAppointment);
 
+router.delete(
+    "/admin/appointments/:id",
+    authMiddleware,
+    adminMiddleware,
+    appointmentController.adminCancelAppointment
+);
+
 module.exports = router;

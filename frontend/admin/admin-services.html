@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Pawlendar | Services</title>
+
+    <link rel="stylesheet" href="admin-services.css">
+    <link rel="stylesheet" href="../navbar.css">
+
+</head>
+
+<body>
+
+
+<header>
+
+    <nav class="main-nav">
+
+        <div class="logo">
+            🐾 Pawlendar
+        </div>
+
+
+        <ul>
+            <li><a href="admin-dashboard.html">Dashboard</a></li>
+            <li><a href="admin-appointment.html">Appointments</a></li>
+            <li><a class="active" href="admin-services.html">Services</a></li>
+            <li><a href="admin-staff.html">Staff</a></li>
+        </ul>
+
+
+        <button class="nav-btn">
+            Logout
+        </button>
+
+
+    </nav>
+
+</header>
+
+
+<section class="services-hero">
+
+    <div class="services-content">
+
+        <h1>Service Management</h1>
+
+        <p>
+            Add, edit, and manage all grooming services offered by Pawlendar.
+        </p>
+
+        <a href="service-form.html" class="add-service-btn">
+            <i class="fa-solid fa-plus"></i>
+            Add New Service
+        </a>
+
+    </div>
+
+</section>
+
+
+<section class="services-wrapper">
+
+    <div class="services-card">
+
+        <div class="services-title">
+
+            <h2>Available Services</h2>
+
+            <span id="serviceCount">0 Services</span>
+
+        </div>
+
+        <table class="services-table">
+
+            <thead>
+
+                <tr>
+
+                    <th>ID</th>
+                    <th>Service</th>
+                    <th>Category</th>
+                    <th>Description</th>
+                    <th>Price</th>
+                    <th>Duration</th>
+                    <th>Actions</th>
+
+                </tr>
+
+            </thead>
+
+            <tbody id="serviceTable">
+
+            </tbody>
+
+        </table>
+
+    </div>
+
+</section>
+
+
+<script src="admin-services.js"></script>
+
+
+</body>
+
+</html>

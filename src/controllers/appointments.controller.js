@@ -56,13 +56,13 @@ exports.bookAppointment = async (req, res) => {
                 message: "Appointments must be booked at least 30 minutes in advance."
             });
         }
-
+        
         // Calculate duration and total price
         const appointmentInfo = await calculateAppointmentEnd(
             service_ids,
             start_datetime
         );
-
+        
         const endDatetime = appointmentInfo.endDatetime;
         const total_price = appointmentInfo.totalPrice;
 
@@ -597,4 +597,37 @@ exports.cancelAppointment = (req, res) => {
 
         }
     );
+};
+
+exports.adminCancelAppointment = (req, res) => {
+
+    const { id } = req.params;
+
+    const sql = `
+        UPDATE appointments
+        SET status = 'Cancelled'
+        WHERE appointment_id = ?
+        AND status NOT IN ('Completed','Cancelled')
+    `;
+
+    db.query(sql, [id], (err, result) => {
+
+        if (err) {
+            return res.status(500).json({
+                error: err.message
+            });
+        }
+
+        if (result.affectedRows === 0) {
+            return res.status(404).json({
+                message: "Appointment not found or already finished."
+            });
+        }
+
+        res.json({
+            message: "Appointment cancelled successfully."
+        });
+
+    });
+
 };

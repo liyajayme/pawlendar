@@ -1,35 +1,33 @@
+const token = localStorage.getItem("token");
+
+
 loadAppointments();
 
 
 async function loadAppointments(){
 
-    const token = localStorage.getItem("token");
-
-
     const response = await fetch(
         "http://localhost:3000/api/appointments/admin/appointments",
         {
-            headers: {
-                "Content-Type": "application/json",
-                "Authorization": "Bearer " + token
-            },
+            headers:{
+                "Authorization":"Bearer " + token
+            }
         }
     );
+
+    const data = await response.json();
 
 
     if(!response.ok){
 
-        alert("Failed to load appointments");
+        alert(data.message || "Failed to load appointments");
 
         return;
 
     }
 
 
-    const result = await response.json();
-
-
-    displayAppointments(result);
+    displayAppointments(data);
 
 }
 
@@ -38,69 +36,141 @@ async function loadAppointments(){
 
 function displayAppointments(appointments){
 
-    const container =
-    document.getElementById("appointmentContainer");
+
+    const table =
+    document.getElementById("appointmentTableBody");
 
 
     let html = "";
 
 
-    appointments.forEach(appointment=>{
+    appointments.forEach(app=>{
 
 
-        const completed =
-        appointment.status === "Completed"
-        ? "disabled"
-        : "";
+        const date =
+        new Date(app.start_datetime)
+        .toLocaleDateString();
+
+
+        const time =
+        new Date(app.start_datetime)
+        .toLocaleTimeString([],{
+            hour:"2-digit",
+            minute:"2-digit"
+        });
 
 
 
         html += `
 
-        <div class="appointment-card">
+        <tr>
+
+            <td>
+                ${app.appointment_id}
+            </td>
 
 
-            <h3>
-            Appointment #${appointment.appointment_id}
-            </h3>
+            <td>
+                ${app.pet_name}
+            </td>
 
 
-            <p>
-            Status:
-            <span class="status-badge">
-            ${appointment.status}
-            </span>
-            </p>
+            <td>
+                ${app.first_name}
+                ${app.last_name}
+            </td>
 
 
-
-            <button
-            ${completed}
-            onclick="
-            changeStatus(
-            ${appointment.appointment_id},
-            '${appointment.status}'
-            )">
-
-            ${getButtonText(appointment.status)}
-
-            </button>
+            <td>
+                ${date}
+            </td>
 
 
-        </div>
+            <td>
+                ${time}
+            </td>
+
+
+            <td>
+                ${
+                app.staff_first_name
+                ?
+                app.staff_first_name + " " + app.staff_last_name
+                :
+                "Unassigned"
+                }
+            </td>
+
+
+            <td>
+
+                <span class="status-badge ${formatStatus(app.status)}">
+
+                    ${app.status}
+
+                </span>
+
+            </td>
+
+
+            <td>
+                ${app.payment_status}
+            </td>
+
+
+            <td>
+                ₱${app.total_price}
+            </td>
+
+
+            <td>
+                <div class="action-buttons">
+                    <button
+                        class="update-btn"
+                        ${app.status === "Completed" || app.status === "Cancelled" ? "disabled" : ""}
+                        onclick="
+                            changeStatus(
+                                ${app.appointment_id},
+                                '${app.status}'
+                            )">
+
+                        ${getButtonText(app.status)}
+
+                    </button>
+
+                    <button
+                        class="cancel-btn"
+                        ${app.status === "Completed" || app.status === "Cancelled" ? "disabled" : ""}
+                        onclick="cancelAppointment(${app.appointment_id})">
+
+                        Cancel
+
+                    </button>
+                </div>
+            </td>
+
+
+        </tr>
 
         `;
-
 
     });
 
 
-    container.innerHTML = html;
+    table.innerHTML = html;
 
 
 }
 
 
+
+function formatStatus(status){
+
+    return status
+    .toLowerCase()
+    .replaceAll(" ","-");
+
+}
 
 
 
@@ -109,17 +179,16 @@ function getButtonText(status){
 
     switch(status){
 
-
         case "Scheduled":
             return "Check In";
 
 
         case "Checked In":
-            return "Start Grooming";
+            return "Start";
 
 
         case "In Progress":
-            return "Ready for Pickup";
+            return "Ready";
 
 
         case "Ready for Pickup":
@@ -130,9 +199,8 @@ function getButtonText(status){
             return "Completed";
 
 
-        default:
-            return "Update";
-
+        case "Cancelled":
+            return "Cancelled";
 
     }
 
@@ -141,12 +209,10 @@ function getButtonText(status){
 
 
 
-
 function getNextStatus(status){
 
 
     switch(status){
-
 
         case "Scheduled":
             return "Checked In";
@@ -167,15 +233,14 @@ function getNextStatus(status){
         default:
             return status;
 
-
     }
 
 }
 
+
+
+
 async function changeStatus(id,currentStatus){
-
-
-    const token = localStorage.getItem("token");
 
 
     const nextStatus =
@@ -185,16 +250,15 @@ async function changeStatus(id,currentStatus){
 
     const response = await fetch(
 
-        `http://localhost:3000/api/appointments/${id}/status`,
+        `http://localhost:3000/api/appointments/admin/appointments/${id}/status`,
 
         {
 
             method:"PUT",
 
-
-            headers: {
-                "Content-Type": "application/json",
-                "Authorization": "Bearer " + token
+            headers:{
+                "Content-Type":"application/json",
+                "Authorization":"Bearer " + token
             },
 
 
@@ -209,10 +273,12 @@ async function changeStatus(id,currentStatus){
     );
 
 
+    const data = await response.json();
+
 
     if(!response.ok){
 
-        alert("Failed to update status");
+        alert(data.message || "Failed to update status");
 
         return;
 
@@ -221,5 +287,44 @@ async function changeStatus(id,currentStatus){
 
     loadAppointments();
 
+}
+
+async function cancelAppointment(id){
+
+    const confirmCancel = confirm(
+        "Are you sure you want to cancel this appointment?"
+    );
+
+    if(!confirmCancel){
+        return;
+    }
+
+    const response = await fetch(
+
+        `http://localhost:3000/api/appointments/admin/appointments/${id}`,
+
+        {
+            method: "DELETE",
+
+            headers:{
+                "Authorization":"Bearer " + token
+            }
+        }
+
+    );
+
+    const data = await response.json();
+
+    if(!response.ok){
+
+        alert(data.message || "Failed to cancel appointment");
+
+        return;
+
+    }
+
+    alert(data.message);
+
+    loadAppointments();
 
 }

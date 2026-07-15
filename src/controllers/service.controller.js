@@ -11,6 +11,7 @@ exports.createService = (req, res) => {
         duration_minutes
     } = req.body;
 
+
     const sql = `
         INSERT INTO service_menu
         (
@@ -23,6 +24,7 @@ exports.createService = (req, res) => {
         )
         VALUES (?, ?, ?, ?, ?, TRUE)
     `;
+
 
     db.query(
         sql,
@@ -41,6 +43,7 @@ exports.createService = (req, res) => {
                 });
             }
 
+
             res.status(201).json({
                 message: "Service created successfully",
                 service_id: result.insertId
@@ -56,15 +59,16 @@ exports.createService = (req, res) => {
 exports.getServices = (req, res) => {
 
     const sql = `
-        SELECT 
-        service_name,
-        category,
-        description,
-        price,
-        duration_minutes
+        SELECT
+            service_id,
+            service_name,
+            category,
+            description,
+            price,
+            duration_minutes
         FROM service_menu
         WHERE active_flag = TRUE
-        ORDER BY service_name
+        ORDER BY category
     `;
 
     db.query(sql, (err, results) => {

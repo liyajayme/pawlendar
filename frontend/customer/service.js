@@ -93,7 +93,7 @@ function renderServices(services) {
     addonsTableBody.innerHTML = "";
 
     services.forEach(service => {
-        if (service.category === "Add-on Service") {
+        if (service.category === "Add-on Service" || service.category === "Alacarte/Add-on Service") { 
             const row = document.createElement("tr");
             row.innerHTML = `
                 <td><strong>${escapeHtml(service.service_name)}</strong></td>

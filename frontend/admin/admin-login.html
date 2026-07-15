@@ -15,13 +15,13 @@
         <nav class="main-nav">
             <div class="logo"><i class="fa-solid fa-paw"></i> Pawlendar</div>
             <ul>
-                <li><a href="index.html">Home</a></li>
-                <li><a href="about.html">About</a></li>
-                <li><a href="service.html">Services</a></li>
-                <li><a href="staff-info.html">Staff</a></li>
-                <li><a href="appointment.html">Appointments</a></li>
+                <li><a href="../customer/index.html">Home</a></li>
+                <li><a href="../customer/about.html">About</a></li>
+                <li><a href="../customer/service.html">Services</a></li>
+                <li><a href="../customer/staff-info.html">Staff</a></li>
+                <li><a href="../customer/appointment.html">Appointments</a></li>
             </ul>
-            <a href="login.html" class="nav-btn">Login or Sign-Up</a>
+            <a href="../customer/login.html" class="nav-btn">Login or Sign-Up</a>
         </nav>
     </header>
     <div class="main-container">
@@ -44,7 +44,7 @@
                 <h2 class="form-title">Admin Sign In</h2>
                 <p class="form-subtitle">Enter your staff credentials to continue.</p>
 
-                <form action="../admin/admin-dashboard.html" method="get">
+                <form id="adminLoginForm">
                     <div class="input-group">
                         <label for="email">Email Address</label>
                         <input type="email" id="email" placeholder="Enter your email" required>
@@ -63,10 +63,11 @@
                 </form>
 
                 <p class="switch-page">
-                    <a href="login.html">Back to Customer Login</a>
+                    <a href="../customer/login.html">Back to Customer Login</a>
                 </p>
             </div>
         </div>
     </div>
+    <script src="admin-login.js"></script>
 </body>
 </html>
