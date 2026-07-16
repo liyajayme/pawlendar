@@ -20,7 +20,7 @@ document.addEventListener("DOMContentLoaded", () => {
         return false;
     }
 
-    const petList = document.querySelector(".pet-list");
+    const form = document.getElementById("petForm");
 
     // ---------- OWNER ----------
 
@@ -28,7 +28,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
         try {
 
-            const res = await fetch("http://localhost:3000/api/owners/me", {
+            const res = await fetch("http://localhost:3000/api/users/me", {
 
                 headers: {
                     Authorization: `Bearer ${token}`
@@ -61,51 +61,36 @@ document.addEventListener("DOMContentLoaded", () => {
 
     }
 
-    // ---------- PETS ----------
-
-    async function loadPets() {
-
-        try {
-
-            const res = await fetch("http://localhost:3000/api/pets", {
-
-                headers: {
-                    Authorization: `Bearer ${token}`
-                }
-
-            });
-
-            if (handleAuthError(res)) return;
-
-            if (!res.ok) return;
-
-            const pets = await res.json();
-
-            petList.innerHTML = "";
-
-            pets.forEach(pet => {
-
-                const card = document.createElement("div");
-
-                card.className = "pet-card";
-
-                card.innerHTML = `
-                        <img src="${pet.photo_url || "../images/default-profile.svg"}">
-                petList.appendChild(card);
-
-            });
-
-        }
-
-        catch (err) {
-
-            console.error(err);
-
-        }
-
-    }
-
     loadOwner();
-    loadPets();
+
+    form.addEventListener("submit", async (e) => {
+        e.preventDefault();
+
+        const pet = {
+            pet_name: document.getElementById("pet_name").value,
+            species: document.getElementById("species").value,
+            breed: document.getElementById("breed").value,
+            gender: document.getElementById("gender").value,
+            birth_date: document.getElementById("birth_date").value || null,
+            weight: document.getElementById("weight").value || null,
+            size: document.getElementById("size").value || null
+        };
+
+        const res = await fetch("http://localhost:3000/api/pets", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+                "Authorization": `Bearer ${token}`
+            },
+            body: JSON.stringify(pet)
+        });
+
+        if (res.ok) {
+            alert("Pet added!");
+            window.location.href = "dashboard-dev.html";
+        } else {
+            alert("Failed to add pet");
+        }
+    });
 
 });
