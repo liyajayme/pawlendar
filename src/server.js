@@ -5,11 +5,27 @@ require("./config/db");
 
 const app = express();
 const env = require("dotenv");
+env.config();
 const PORT = process.env.PORT || 3000;
 
 app.use(cors());
 app.use(express.json());
-app.use(express.static(path.join(__dirname, "../frontend/")));
+
+// Customer frontend
+app.use(express.static(path.join(__dirname, "../frontend/customer")));
+
+// Admin frontend
+app.use("/admin", express.static(path.join(__dirname, "../frontend/admin")));
+
+// Admin landing page
+app.get("/admin", (req, res) => {
+    res.sendFile(path.join(__dirname, "../frontend/admin/admin-login.html"));
+});
+
+// Root website
+app.get("/", (req, res) => {
+    res.sendFile(path.join(__dirname, "../frontend/customer/index.html"));
+});
 
 //routes
 const userRoutes = require("./routes/user.routes");
