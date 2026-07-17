@@ -12,7 +12,7 @@ app.use(cors());
 app.use(express.json());
 
 // Customer frontend
-app.use(express.static(path.join(__dirname, "../frontend/customer")));
+app.use(express.static(path.join(__dirname, "../frontend")));
 
 // Admin frontend
 app.use("/admin", express.static(path.join(__dirname, "../frontend/admin")));
