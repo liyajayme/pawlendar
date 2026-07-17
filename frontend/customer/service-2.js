@@ -43,7 +43,7 @@ if (backBtn) {
         if (lastPage) {
             window.location.href = lastPage;
         } else {
-            window.location.href = "index.html";
+            window.location.href = "/customer/index.html";
         }
     });
 }
