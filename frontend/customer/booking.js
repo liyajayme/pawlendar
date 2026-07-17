@@ -4,6 +4,24 @@ if (!token) {
     window.location.href = "login.html";
 }
 
+fetch("http://localhost:3000/api/auth/profile", {
+    headers: {
+        Authorization: `Bearer ${token}`
+    }
+})
+.then(async response => {
+    if (!response.ok) {
+        localStorage.removeItem("token");
+        window.location.href = "login.html";
+        return;
+    }
+
+    // Token is valid.
+})
+.catch(() => {
+    window.location.href = "login.html";
+});
+
 const params = new URLSearchParams(window.location.search);
 const petId = params.get("pet_id");
 
