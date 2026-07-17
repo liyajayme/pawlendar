@@ -1,5 +1,5 @@
 const servicesGrid = document.getElementById("servicesGrid");
-const addonsTableBody = document.getElementById("addonsTableBody");
+const addonsContainer = document.getElementById("addonsContainer");
 
 // Displayed whenever the API is unavailable or the database has no active services yet.
 const fallbackServices = [
@@ -90,32 +90,49 @@ function formatPrice(price) {
 
 function renderServices(services) {
     servicesGrid.innerHTML = "";
-    addonsTableBody.innerHTML = "";
+    addonsContainer.innerHTML = "";
 
     services.forEach(service => {
         if (service.category === "Add-on Service" || service.category === "Alacarte/Add-on Service") { 
-            const row = document.createElement("tr");
-            row.innerHTML = `
-                <td><strong>${escapeHtml(service.service_name)}</strong></td>
-                <td>${escapeHtml(service.description)}</td>
-                <td>₱${formatPrice(service.price)}</td>
+            const addon = document.createElement("div");
+            addon.className = "addon-row";
+
+            addon.innerHTML = `
+                <div>
+                    <p class="addon-name">${escapeHtml(service.service_name)}</p>
+                    <p class="addon-desc">${escapeHtml(service.description)}</p>
+                </div>
+
+                <span class="addon-price">
+                    ₱${formatPrice(service.price)}
+                </span>
             `;
-            addonsTableBody.appendChild(row);
+
+            addonsContainer.appendChild(addon);
             return;
         }
 
-        const card = document.createElement("article");
-        card.className = "service-menu-card";
-        const imageUrl = service.image_url || categoryImages[service.category] || "../images/default-profile.svg";
+        const card = document.createElement("div");
+        card.className = "ticket";
+
         card.innerHTML = `
-            <img class="service-card-image" src="${escapeHtml(imageUrl)}" alt="${escapeHtml(service.service_name)}">
-            <div class="service-card-content">
-                <span class="service-icon" aria-hidden="true">${serviceIcons[service.category] || "🐾"}</span>
-                <h3>${escapeHtml(service.service_name)}</h3>
-                <p><strong>${escapeHtml(service.category)}</strong></p>
-                <p class="service-price">Starts at ₱${formatPrice(service.price)}</p>
-                <p>${escapeHtml(service.description)}</p>
-                ${service.duration_minutes ? `<p><strong>Estimated time:</strong> ${Number(service.duration_minutes)} minutes</p>` : ""}
+            <div class="ticket-icon">
+                🐾
+            </div>
+
+            <h3>${escapeHtml(service.service_name)}</h3>
+
+            <p>${escapeHtml(service.description)}</p>
+
+            <div class="ticket-foot">
+                <span class="ticket-price">
+                    <small>Starts at</small>
+                    ₱${formatPrice(service.price)}
+                </span>
+
+                <span class="ticket-time">
+                    ${service.duration_minutes} MIN
+                </span>
             </div>
         `;
         servicesGrid.appendChild(card);
@@ -125,8 +142,8 @@ function renderServices(services) {
         servicesGrid.innerHTML = '<p class="services-empty">Main grooming services will be available soon.</p>';
     }
 
-    if (!addonsTableBody.children.length) {
-        addonsTableBody.innerHTML = '<tr><td colspan="3">Add-on treatments will be available soon.</td></tr>';
+    if (!addonsContainer.children.length) {
+        addonsContainer.innerHTML = '<p class="addons-empty">Add-on treatments will be available soon.</p>';
     }
 }
 

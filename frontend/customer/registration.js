@@ -14,42 +14,47 @@ form.addEventListener("submit", async (e) => {
         return;
     }
 
-    const response = await fetch(
-        "http://localhost:3000/api/auth/register",
-        {
-            method: "POST",
-            headers: {
-                "Content-Type":
-                    "application/json"
-            },
-            body: JSON.stringify({
-                first_name:
-                    document.getElementById("first_name").value,
+    try {
+        const response = await fetch(
+            "http://localhost:3000/api/auth/register",
+            {
+                method: "POST",
+                headers: {
+                    "Content-Type":
+                        "application/json"
+                },
+                body: JSON.stringify({
+                    first_name:
+                        document.getElementById("first_name").value,
 
-                last_name:
-                    document.getElementById("last_name").value,
+                    last_name:
+                        document.getElementById("last_name").value,
 
-                email:
-                    document.getElementById("email").value,
+                    email:
+                        document.getElementById("email").value,
 
-                phone_number:
-                    document.getElementById("phone_number").value,
+                    phone_number:
+                        document.getElementById("phone_number").value,
 
-                password
-            })
+                    password
+                })
+            }
+        );
+
+        const data =
+            await response.json();
+
+        if (!response.ok) {
+            alert(data.message);
+            return;
         }
-    );
 
-    const data =
-        await response.json();
+        alert("Registration successful");
 
-    if (!response.ok) {
-        alert(data.message);
-        return;
+        window.location.href =
+            "login.html";
+    } catch (error) {
+        console.error(error);
+        alert("Unable to connect to the server.");
     }
-
-    alert("Registration successful");
-
-    window.location.href =
-        "login.html";
 });

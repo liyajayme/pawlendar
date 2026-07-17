@@ -41,5 +41,6 @@ form.addEventListener("submit", async (e) => {
 
     } catch (error) {
         console.error(error);
+        alert("Unable to connect to the server.");
     }
 });
