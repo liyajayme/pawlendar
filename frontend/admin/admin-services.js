@@ -28,6 +28,7 @@ async function loadServices(){
     if(!response.ok){
 
         alert(data.message || "Failed loading services");
+        window.location.href = "/admin";
 
         return;
 
