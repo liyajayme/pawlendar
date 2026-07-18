@@ -1,6 +1,6 @@
 const token = localStorage.getItem("token");
 if (!token) {
-    window.location.href = "/admin";
+    window.location.href = "http://localhost:3000/admin";
 }
 
 loadAppointments();
@@ -9,7 +9,7 @@ loadAppointments();
 async function loadAppointments(){
 
     const response = await fetch(
-        "/api/admin/appointments",
+        "http://localhost:3000/api/admin/appointments",
         {
             headers:{
                 "Authorization":"Bearer " + token
@@ -22,7 +22,8 @@ async function loadAppointments(){
 
     if(!response.ok){
 
-        window.location.replace("/admin");
+        window.location.replace("http://localhost:3000/admin");
+
         alert(data.message || "Failed to load appointments");
 
         return;

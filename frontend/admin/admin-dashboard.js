@@ -5,11 +5,12 @@ async function loadDashboard(){
     const token = localStorage.getItem("token");
 
     if (!token) {
-        window.location.href = "/admin";
+        window.location.href = "http://localhost:3000/admin";
+        return;
     }
 
     const response = await fetch(
-        "/api/admin/stats",
+        "http://localhost:3000/api/admin/stats",
         {
             headers:{
                 "Authorization":"Bearer " + token
@@ -19,7 +20,7 @@ async function loadDashboard(){
 
     if(!response.ok){
 
-        window.location.replace("/admin");
+        window.location.replace("http://localhost:3000/admin");
         alert("Failed to load dashboard");
 
         return;
