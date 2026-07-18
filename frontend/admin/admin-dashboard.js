@@ -14,7 +14,8 @@ async function loadDashboard(){
     );
 
     if(!response.ok){
-
+        
+        window.location.href = "/admin";
         alert("Failed to load dashboard");
 
         return;

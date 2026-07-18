@@ -53,6 +53,7 @@ form.addEventListener("submit", async (e) => {
         else{
 
             alert(data.message || data.error);
+            window.location.href = "/admin";
 
         }
     } catch (error) {
