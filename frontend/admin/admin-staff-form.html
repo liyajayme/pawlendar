@@ -11,15 +11,12 @@
     <link rel="stylesheet" href="../navbar.css">
     <link rel="stylesheet" href="admin-staff-form.css">
 
-    <link 
-        rel="stylesheet" 
+    <link rel="stylesheet"
         href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
 
 </head>
 
-
 <body data-active-nav="staff">
-
 
     <header class="navbar">
 
@@ -27,30 +24,10 @@
 
             <svg width="30" height="30" viewBox="0 0 30 30" fill="none">
 
-                <ellipse 
-                    cx="15" 
-                    cy="18" 
-                    rx="6.5" 
-                    ry="5.5" 
-                    fill="var(--clay)" />
-
-                <circle 
-                    cx="8.5" 
-                    cy="9.5" 
-                    r="3" 
-                    fill="var(--clay)" />
-
-                <circle 
-                    cx="15" 
-                    cy="6.5" 
-                    r="3" 
-                    fill="var(--clay)" />
-
-                <circle 
-                    cx="21.5" 
-                    cy="9.5" 
-                    r="3" 
-                    fill="var(--clay)" />
+                <ellipse cx="15" cy="18" rx="6.5" ry="5.5" fill="var(--clay)" />
+                <circle cx="8.5" cy="9.5" r="3" fill="var(--clay)" />
+                <circle cx="15" cy="6.5" r="3" fill="var(--clay)" />
+                <circle cx="21.5" cy="9.5" r="3" fill="var(--clay)" />
 
             </svg>
 
@@ -58,98 +35,57 @@
 
         </a>
 
-
-
         <nav class="nav-list">
 
-            <a href="admin-dashboard.html">
-                Dashboard
-            </a>
+            <a href="admin-dashboard.html">Dashboard</a>
 
-            <a href="admin-appointment.html">
-                Appointments
-            </a>
+            <a href="admin-appointment.html">Appointments</a>
 
-            <a href="admin-calendar.html">
-                Calendar
-            </a>
+            <a href="admin-calendar.html">Calendar</a>
 
-            <a href="admin-services.html">
-                Services
-            </a>
+            <a href="admin-services.html">Services</a>
 
-            <a href="admin-staff.html" class="active">
-                Staff
-            </a>
+            <a href="admin-staff.html" class="active">Staff</a>
 
         </nav>
 
-
-
         <div class="nav-auth">
 
-            <a 
-                href="#" 
-                id="logoutBtn" 
-                class="btn-ghost-small">
-
+            <a href="#" id="logoutBtn" class="btn-ghost-small">
                 Logout
-
             </a>
 
         </div>
 
-
     </header>
-
-
-
 
     <main class="dashboard-layout">
 
-
         <section class="content-panel">
-
 
             <div class="content-wrapper">
 
-
                 <header class="dashboard-header">
 
-
-                    <h1>
-                        Add New Staff
-                    </h1>
-
+                    <h1>Add New Staff</h1>
 
                     <p>
                         Fill in the staff member's information below to add them to your Pawlendar team.
                     </p>
 
-
                 </header>
-
-
 
                 <hr>
 
-
-
-
                 <form id="staffForm">
 
-
-                    <!-- NAME -->
+                    <!-- BASIC INFORMATION -->
 
                     <div class="form-row two-columns">
 
-
                         <div class="input-group">
 
-                            <label for="first_name">
-                                First Name
-                            </label>
-
+                            <label for="first_name">First Name</label>
 
                             <input
                                 type="text"
@@ -157,18 +93,11 @@
                                 placeholder="Enter first name"
                                 required>
 
-
                         </div>
-
-
-
 
                         <div class="input-group">
 
-                            <label for="last_name">
-                                Last Name
-                            </label>
-
+                            <label for="last_name">Last Name</label>
 
                             <input
                                 type="text"
@@ -176,49 +105,26 @@
                                 placeholder="Enter last name"
                                 required>
 
-
                         </div>
-
 
                     </div>
 
-
-
-
-
-                    <!-- CONTACT INFORMATION -->
-
-
                     <div class="form-row two-columns">
-
 
                         <div class="input-group">
 
-
-                            <label for="email">
-                                Email
-                            </label>
-
+                            <label for="email">Email</label>
 
                             <input
                                 type="email"
                                 id="email"
                                 placeholder="staff@pawlendar.com">
 
-
                         </div>
-
-
-
-
 
                         <div class="input-group">
 
-
-                            <label for="phone_number">
-                                Phone Number
-                            </label>
-
+                            <label for="phone_number">Phone Number</label>
 
                             <input
                                 type="tel"
@@ -227,30 +133,15 @@
                                 maxlength="15"
                                 required>
 
-
                         </div>
-
 
                     </div>
 
-
-
-
-
-
-                    <!-- STAFF DETAILS -->
-
-
                     <div class="form-row two-columns">
-
 
                         <div class="input-group">
 
-
-                            <label for="specialization">
-                                Specialization
-                            </label>
-
+                            <label for="specialization">Specialization</label>
 
                             <input
                                 type="text"
@@ -258,98 +149,132 @@
                                 placeholder="e.g. Dog Grooming, Cat Grooming"
                                 required>
 
-
                         </div>
-
-
-
-
-
 
                         <div class="input-group">
 
-
-                            <label for="hire_date">
-                                Hire Date
-                            </label>
-
+                            <label for="hire_date">Hire Date</label>
 
                             <input
                                 type="date"
                                 id="hire_date"
                                 required>
 
-
                         </div>
-
 
                     </div>
 
-
-
-
-
-                    <p 
-                        id="formError" 
-                        class="form-error" 
+                    <p
+                        id="formError"
+                        class="form-error"
                         style="display:none;">
                     </p>
 
+                    <hr>
 
+                    <!-- AVAILABILITY -->
 
+                    <div class="availability-section">
 
+                        <h2>Weekly Availability</h2>
 
+                        <p class="availability-note">
+                            Select the days the groomer is available and specify their working hours.
+                        </p>
+
+                        <div class="availability-table">
+
+                            <div class="availability-header">
+                                <span>Day</span>
+                                <span>Available</span>
+                                <span>Start</span>
+                                <span>End</span>
+                            </div>
+
+                            <div class="availability-row">
+                                <span>Monday</span>
+                                <input type="checkbox" id="monday" checked>
+                                <input type="time" id="mondayStart" value="09:00">
+                                <input type="time" id="mondayEnd" value="17:00">
+                            </div>
+
+                            <div class="availability-row">
+                                <span>Tuesday</span>
+                                <input type="checkbox" id="tuesday" checked>
+                                <input type="time" id="tuesdayStart" value="09:00">
+                                <input type="time" id="tuesdayEnd" value="17:00">
+                            </div>
+
+                            <div class="availability-row">
+                                <span>Wednesday</span>
+                                <input type="checkbox" id="wednesday" checked>
+                                <input type="time" id="wednesdayStart" value="09:00">
+                                <input type="time" id="wednesdayEnd" value="17:00">
+                            </div>
+
+                            <div class="availability-row">
+                                <span>Thursday</span>
+                                <input type="checkbox" id="thursday" checked>
+                                <input type="time" id="thursdayStart" value="09:00">
+                                <input type="time" id="thursdayEnd" value="17:00">
+                            </div>
+
+                            <div class="availability-row">
+                                <span>Friday</span>
+                                <input type="checkbox" id="friday" checked>
+                                <input type="time" id="fridayStart" value="09:00">
+                                <input type="time" id="fridayEnd" value="17:00">
+                            </div>
+
+                            <div class="availability-row">
+                                <span>Saturday</span>
+                                <input type="checkbox" id="saturday">
+                                <input type="time" id="saturdayStart" value="09:00">
+                                <input type="time" id="saturdayEnd" value="17:00">
+                            </div>
+
+                            <div class="availability-row">
+                                <span>Sunday</span>
+                                <input type="checkbox" id="sunday">
+                                <input type="time" id="sundayStart" value="09:00">
+                                <input type="time" id="sundayEnd" value="17:00">
+                            </div>
+
+                        </div>
+
+                    </div>
 
                     <div class="panel-buttons">
 
-
-                        <a 
-                            href="admin-staff.html" 
+                        <a
+                            href="admin-staff.html"
                             class="outline-btn">
 
                             Cancel
 
                         </a>
 
-
-
-
-
-                        <button 
-                            type="submit" 
-                            class="main-btn" 
+                        <button
+                            type="submit"
+                            class="main-btn"
                             id="saveStaffBtn">
 
                             Save Staff
 
                         </button>
 
-
-
                     </div>
-
-
 
                 </form>
 
-
-
             </div>
-
 
         </section>
 
-
     </main>
-
-
-
-
 
     <script src="admin-staff-form.js"></script>
 
-
 </body>
-
 
 </html>

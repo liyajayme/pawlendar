@@ -8,11 +8,12 @@ exports.createGroomer = (req, res) => {
         email,
         phone_number,
         specialization,
-        hire_date
+        hire_date,
+        availability = []
     } = req.body;
 
-    const sql = `
-        INSERT INTO staff 
+    const staffSql = `
+        INSERT INTO staff
         (
             first_name,
             last_name,
@@ -20,35 +21,92 @@ exports.createGroomer = (req, res) => {
             phone_number,
             specialization,
             hire_date
-        ) 
+        )
         VALUES (?, ?, ?, ?, ?, ?)
     `;
 
     db.query(
-        sql,
+        staffSql,
         [
             first_name,
             last_name,
-            email,
+            email || null,
             phone_number,
             specialization,
             hire_date
         ],
         (err, result) => {
+
             if (err) {
                 return res.status(500).json({
                     error: err.message
                 });
             }
 
-            res.status(201).json({
-                message: "Groomer created successfully",
-                staff_id: result.insertId
-            });
+            const staffId = result.insertId;
+
+            // No availability submitted
+            if (availability.length === 0) {
+                return res.status(201).json({
+                    message: "Groomer created successfully",
+                    staff_id: staffId
+                });
+            }
+
+            const availabilityValues = availability.map(slot => [
+
+                staffId,
+                slot.day_of_week,
+                slot.start_time,
+                slot.end_time
+
+            ]);
+
+            const availabilitySql = `
+                INSERT INTO staff_availability
+                (
+                    staff_id,
+                    day_of_week,
+                    start_time,
+                    end_time
+                )
+                VALUES ?
+            `;
+
+            db.query(
+                availabilitySql,
+                [availabilityValues],
+                (availabilityErr) => {
+
+                    if (availabilityErr) {
+
+                        // Remove the staff if availability insertion fails
+                        db.query(
+                            "DELETE FROM staff WHERE staff_id = ?",
+                            [staffId]
+                        );
+
+                        return res.status(500).json({
+                            error: availabilityErr.message
+                        });
+
+                    }
+
+                    res.status(201).json({
+
+                        message: "Groomer created successfully",
+
+                        staff_id: staffId
+
+                    });
+
+                }
+            );
+
         }
     );
 
-}
+};
 
 // gets all groomers (woah)
 exports.getGroomers = (req, res) => {

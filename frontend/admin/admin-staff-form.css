@@ -154,6 +154,108 @@
 }
 
 /* ===================================================
+   AVAILABILITY
+=================================================== */
+
+.availability-section{
+    margin-top:10px;
+}
+
+.availability-section h2{
+    font-size:22px;
+    color:#4A2328;
+    margin-bottom:8px;
+    font-weight:700;
+}
+
+.availability-note{
+    color:#6B4B4B;
+    font-size:14px;
+    margin-bottom:20px;
+}
+
+.availability-table{
+    border:1px solid #ECE3D8;
+    border-radius:14px;
+    overflow:hidden;
+    background:#FFFFFF;
+}
+
+.availability-header,
+.availability-row{
+    display:grid;
+    grid-template-columns:
+        1.5fr
+        .8fr
+        1.2fr
+        1.2fr;
+
+    align-items:center;
+    gap:15px;
+
+    padding:14px 20px;
+}
+
+.availability-header{
+    background:#F9F5F1;
+    color:#4A2328;
+    font-weight:700;
+    font-size:14px;
+    border-bottom:1px solid #ECE3D8;
+}
+
+.availability-row{
+    border-bottom:1px solid #F3ECE5;
+}
+
+.availability-row:last-child{
+    border-bottom:none;
+}
+
+.availability-row span{
+    color:#4A2328;
+    font-weight:600;
+}
+
+.availability-row input[type="checkbox"]{
+    width:20px;
+    height:20px;
+    accent-color:var(--gold);
+    cursor:pointer;
+    justify-self:center;
+}
+
+.availability-row input[type="time"]{
+    width:100%;
+    box-sizing:border-box;
+
+    padding:11px 14px;
+
+    border:1px solid #E8DDD2;
+    border-radius:10px;
+
+    background:#FAFAFA;
+
+    font-family:inherit;
+    font-size:14px;
+
+    color:#4A2328;
+
+    transition:.2s;
+}
+
+.availability-row input[type="time"]:focus{
+    outline:none;
+    border-color:#F5AC53;
+    background:#FFFFFF;
+    box-shadow:0 0 0 4px rgba(245,172,83,.18);
+}
+
+.availability-row:hover{
+    background:#FFFDF8;
+}
+
+/* ===================================================
    BUTTONS
 =================================================== */
 
