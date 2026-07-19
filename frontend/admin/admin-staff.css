@@ -71,6 +71,11 @@
 
     transition:.25s;
 
+    text-decoration:none; /* removes underline */
+    display:inline-flex; /* makes it behave like a button */
+    align-items:center;
+    gap:8px;
+
 }
 
 #addBtn:hover{
