@@ -85,6 +85,26 @@ async function loadDashboard(){
 
     }
 
+    const logoutBtn = document.getElementById("logoutBtn");
+
+    logoutBtn.addEventListener("click", (e) => {
+
+        e.preventDefault();
+
+        const confirmed = confirm("Are you sure you want to log out?");
+
+        if (!confirmed) return;
+
+        localStorage.removeItem("token");
+
+        // remove anything else you may store later
+        localStorage.removeItem("owner");
+        localStorage.removeItem("admin");
+
+        window.location.href = "../public/login.html";
+
+    });
+
 }
 
 
@@ -433,22 +453,3 @@ document.querySelectorAll(".nav-list a").forEach(link => {
     }
 });
 
-const logoutBtn = document.getElementById("logoutBtn");
-
-logoutBtn.addEventListener("click", (e) => {
-
-    e.preventDefault();
-
-    const confirmed = confirm("Are you sure you want to log out?");
-
-    if (!confirmed) return;
-
-    localStorage.removeItem("token");
-
-    // remove anything else you may store later
-    localStorage.removeItem("owner");
-    localStorage.removeItem("admin");
-
-    window.location.href = "../public/login.html";
-
-});
