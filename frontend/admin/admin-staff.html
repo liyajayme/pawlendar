@@ -16,189 +16,134 @@
 
 </head>
 
-
 <body>
 
+    <div id="app" style="display:none;">
 
-<div id="app" style="display:none;">
+        <header class="navbar">
 
+            <a href="admin-dashboard.html" class="brand brand-dark">
 
-<header class="navbar">
+                <svg width="30" height="30" viewBox="0 0 30 30" fill="none">
+                    <ellipse cx="15" cy="18" rx="6.5" ry="5.5" fill="var(--clay)" />
+                    <circle cx="8.5" cy="9.5" r="3" fill="var(--clay)" />
+                    <circle cx="15" cy="6.5" r="3" fill="var(--clay)" />
+                    <circle cx="21.5" cy="9.5" r="3" fill="var(--clay)" />
+                </svg>
 
-    <a href="admin-dashboard.html" class="brand brand-dark">
+                <span>Pawlendar</span>
 
-        <svg width="30" height="30" viewBox="0 0 30 30" fill="none">
-            <ellipse cx="15" cy="18" rx="6.5" ry="5.5" fill="var(--clay)" />
-            <circle cx="8.5" cy="9.5" r="3" fill="var(--clay)" />
-            <circle cx="15" cy="6.5" r="3" fill="var(--clay)" />
-            <circle cx="21.5" cy="9.5" r="3" fill="var(--clay)" />
-        </svg>
+            </a>
 
-        <span>Pawlendar</span>
+            <nav class="nav-list">
 
-    </a>
+                <a href="admin-dashboard.html">Dashboard</a>
+                <a href="admin-appointment.html">Appointments</a>
+                <a href="admin-calendar.html">Calendar</a>
+                <a href="admin-services.html">Services</a>
+                <a href="admin-staff.html">Staff</a>
 
+            </nav>
 
-    <nav class="nav-list">
+            <div class="nav-auth">
 
-        <a href="admin-dashboard.html">Dashboard</a>
-        <a href="admin-appointment.html">Appointments</a>
-        <a href="admin-calendar.html">Calendar</a>
-        <a href="admin-services.html">Services</a>
-        <a href="admin-staff.html">Staff</a>
+                <a href="#" id="logoutBtn" class="btn-ghost-small">
+                    Logout
+                </a>
 
-    </nav>
+            </div>
 
+        </header>
 
-    <div class="nav-auth">
+        <section class="staff-hero paws-bg">
 
-        <a href="#" id="logoutBtn" class="btn-ghost-small">
-            Logout
-        </a>
+            <div class="staff-content">
+
+                <h1>Staff Management</h1>
+
+                <p>
+                    Manage groomers, their information, and weekly availability.
+                </p>
+
+                <a href="admin-staff-form.html" class="add-staff-btn">
+
+                    <i class="fa-solid fa-plus"></i>
+
+                    Add Groomer
+
+                </a>
+
+            </div>
+
+        </section>
+
+        <section class="staff-wrapper">
+
+            <div class="staff-card">
+
+                <div class="staff-title">
+
+                    <h2>Groomers</h2>
+
+                    <input
+                        type="text"
+                        id="searchInput"
+                        placeholder="Search groomer..."
+                    >
+
+                </div>
+
+                <table class="staff-table">
+
+                    <thead>
+
+                        <tr>
+
+                            <th>ID</th>
+                            <th>Name</th>
+                            <th>Specialization</th>
+                            <th>Phone</th>
+                            <th>Email</th>
+                            <th>Action</th>
+
+                        </tr>
+
+                    </thead>
+
+                    <tbody id="staffTableBody">
+
+                    </tbody>
+
+                </table>
+
+            </div>
+
+        </section>
+
+        <section
+            id="staffDetails"
+            style="display:none;"
+        >
+
+            <div class="staff-wrapper">
+
+                <div class="staff-card">
+
+                    <h2>Groomer Details</h2>
+
+                    <div id="detailsContainer">
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </section>
 
     </div>
 
-
-</header>
-
-
-
-
-<section class="staff-hero paws-bg">
-
-
-    <div class="staff-content">
-
-        <h1>
-            Staff Management
-        </h1>
-
-
-        <p>
-            Manage groomers, their information, and weekly availability.
-        </p>
-
-
-        <a href="admin-staff-form.html" class="add-staff-btn">
-
-            <i class="fa-solid fa-plus"></i>
-
-            Add Groomer
-
-        </a>
-
-
-    </div>
-
-
-</section>
-
-
-
-
-
-
-<section class="staff-wrapper">
-
-
-<div class="staff-card">
-
-
-<div class="staff-title">
-
-
-<h2>
-    Groomers
-</h2>
-
-
-<input 
-    type="text"
-    id="searchInput"
-    placeholder="Search groomer..."
->
-
-
-</div>
-
-
-
-
-
-<table class="staff-table">
-
-
-<thead>
-
-<tr>
-
-<th>ID</th>
-<th>Name</th>
-<th>Specialization</th>
-<th>Phone</th>
-<th>Email</th>
-<th>Action</th>
-
-</tr>
-
-</thead>
-
-
-
-<tbody id="staffTableBody">
-
-</tbody>
-
-
-
-</table>
-
-
-
-</div>
-
-
-</section>
-
-
-
-
-
-
-<section id="staffDetails" style="display:none;">
-
-
-<div class="staff-wrapper">
-
-
-<div class="staff-card">
-
-
-<h2>
-Groomer Details
-</h2>
-
-
-<div id="detailsContainer"></div>
-
-
-</div>
-
-
-</div>
-
-
-</section>
-
-
-
-
-</div>
-
-
-
-<script src="admin-staff.js"></script>
-
+    <script src="admin-staff.js"></script>
 
 </body>
 

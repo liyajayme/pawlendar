@@ -1,363 +1,241 @@
 @import url("../styles.css");
 
-
-/* ===========================
+/* ===================================================
    HERO
-=========================== */
-
+=================================================== */
 
 .staff-hero{
-
-    background:linear-gradient(135deg,#FFF5E8,#FFE6C9);
-
-    padding:80px 0;
-
+    padding:90px 0;
 }
-
-
 
 .staff-content{
-
-    width:min(1200px,90%);
-
-    margin:auto;
-
+    width:min(1400px,92%);
+    margin:0 auto;
 }
-
-
 
 .staff-content h1{
-
-    font-size:48px;
-
+    font-size:64px;
     color:#4A2328;
-
-    margin-bottom:15px;
-
+    margin-bottom:18px;
 }
-
-
 
 .staff-content p{
-
+    font-size:22px;
     color:#6B4B4B;
-
-    font-size:18px;
-
-    margin-bottom:30px;
-
+    margin-bottom:35px;
 }
 
-
-
-
-/* BUTTON */
-
+/* ===================================================
+   BUTTON
+=================================================== */
 
 .add-staff-btn{
-
     display:inline-flex;
-
     align-items:center;
-
     gap:12px;
 
-    padding:15px 28px;
+    padding:18px 34px;
 
     background:#F5AC53;
-
     color:#4A2328;
 
-    border-radius:50px;
+    border-radius:999px;
 
     font-weight:700;
-
     text-decoration:none;
 
     transition:.25s;
-
 }
-
-
 
 .add-staff-btn:hover{
-
     background:#E49A3D;
-
-    transform:translateY(-3px);
-
+    transform:translateY(-2px);
 }
 
-
-
-
-/* ===========================
-   CARD
-=========================== */
-
+/* ===================================================
+   WRAPPER
+=================================================== */
 
 .staff-wrapper{
-
     width:min(1400px,92%);
-
-    margin:60px auto;
-
+    margin:70px auto;
 }
 
-
+/* ===================================================
+   CARD
+=================================================== */
 
 .staff-card{
+    background:#fff;
 
-    background:white;
+    border-radius:30px;
 
-    border-radius:25px;
+    padding:40px;
 
-    padding:35px;
-
-    box-shadow:0 15px 40px rgba(74,35,40,.08);
-
+    box-shadow:
+        0 15px 40px rgba(74,35,40,.08);
 }
 
-
-
-
+/* ===================================================
+   HEADER
+=================================================== */
 
 .staff-title{
-
     display:flex;
-
     justify-content:space-between;
-
     align-items:center;
 
-    margin-bottom:30px;
+    gap:30px;
 
+    margin-bottom:35px;
 }
-
-
 
 .staff-title h2{
-
+    font-size:54px;
     color:#4A2328;
-
-    font-size:34px;
-
 }
-
-
-
 
 .staff-title input{
+    width:340px;
 
-    padding:12px 18px;
+    padding:15px 20px;
 
-    border:1px solid #ddd;
+    border:1px solid #DDD;
+    border-radius:15px;
 
-    border-radius:12px;
-
-    width:300px;
-
-    font-size:15px;
-
+    font-size:16px;
 }
-
-
-
 
 .staff-title input:focus{
-
     outline:none;
-
     border-color:#9F5F80;
-
-    box-shadow:0 0 0 3px rgba(159,95,128,.15);
-
+    box-shadow:0 0 0 4px rgba(159,95,128,.12);
 }
 
-
-
-
-/* ===========================
+/* ===================================================
    TABLE
-=========================== */
-
+=================================================== */
 
 .staff-table{
-
     width:100%;
-
     border-collapse:collapse;
-
 }
-
-
 
 .staff-table thead{
-
-    background:#F8F4EF;
-
+    background:#F6F1EB;
 }
-
-
 
 .staff-table th{
-
-    padding:18px;
-
-    color:#4A2328;
-
+    padding:22px;
     text-align:left;
 
+    font-size:17px;
+    color:#4A2328;
 }
-
-
 
 .staff-table td{
-
-    padding:18px;
+    padding:22px;
+    border-bottom:1px solid #EEE;
 
     color:#5C3338;
-
-    border-bottom:1px solid #F2F2F2;
-
+    vertical-align:middle;
 }
-
-
 
 .staff-table tbody tr:hover{
-
-    background:#FFF8EF;
-
+    background:#FFF9F2;
 }
 
+/* ===================================================
+   ACTIONS
+=================================================== */
 
-
-
-/* ===========================
-   ACTION BUTTONS
-=========================== */
-
+.staff-table td:last-child{
+    white-space:nowrap;
+}
 
 .staff-table button{
-
     border:none;
+    cursor:pointer;
 
     padding:10px 18px;
 
-    border-radius:12px;
+    border-radius:14px;
 
-    cursor:pointer;
-
-    font-weight:600;
+    font-weight:700;
 
     margin-right:8px;
 
+    transition:.2s;
 }
-
-
-
-.staff-table button:first-child{
-
-    background:#C1EBE9;
-
-    color:#235857;
-
-}
-
-
-
-.staff-table button:nth-child(2){
-
-    background:#FFF1D8;
-
-    color:#A56C00;
-
-}
-
-
-
-.staff-table button:last-child{
-
-    background:#FFE0E0;
-
-    color:#A02828;
-
-}
-
-
 
 .staff-table button:hover{
-
     transform:translateY(-2px);
-
 }
 
+.staff-table button:nth-child(1){
+    background:#CBEDED;
+    color:#235857;
+}
 
+.staff-table button:nth-child(2){
+    background:#FFF0C8;
+    color:#A56C00;
+}
 
+.staff-table button:nth-child(3){
+    background:#FFDADA;
+    color:#B12828;
+}
 
-/* ===========================
- DETAILS
-=========================== */
+/* ===================================================
+   DETAILS
+=================================================== */
 
+#staffDetails{
+    width:min(1400px,92%);
+    margin:0 auto 70px;
+}
 
 #detailsContainer{
-
-    margin-top:20px;
-
+    margin-top:25px;
 }
-
 
 #detailsContainer h3{
-
+    font-size:34px;
+    margin-bottom:15px;
     color:#4A2328;
-
-    font-size:28px;
-
 }
-
-
 
 #detailsContainer p{
-
+    margin-bottom:10px;
+    line-height:1.7;
     color:#5C3338;
-
-    line-height:1.6;
-
 }
 
+/* ===================================================
+   MOBILE
+=================================================== */
 
+@media (max-width:1000px){
 
+    .staff-content h1{
+        font-size:46px;
+    }
 
-/* MOBILE */
+    .staff-title{
+        flex-direction:column;
+        align-items:flex-start;
+    }
 
-@media(max-width:1000px){
+    .staff-title input{
+        width:100%;
+    }
 
+    .staff-card{
+        overflow-x:auto;
+    }
 
-.staff-wrapper{
-
-    width:96%;
-
-}
-
-
-.staff-table{
-
-    min-width:900px;
-
-}
-
-
-.staff-card{
-
-    overflow:auto;
-
-}
-
-
-.staff-content h1{
-
-    font-size:38px;
-
-}
-
+    .staff-table{
+        min-width:900px;
+    }
 }
