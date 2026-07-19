@@ -198,6 +198,20 @@ document.addEventListener("DOMContentLoaded", () => {
 
     }
 
+    const logoutBtn = document.getElementById("logoutBtn");
+
+    logoutBtn.addEventListener("click", (e) => {
+        e.preventDefault();
+
+        const confirmed = confirm("Are you sure you want to log out?");
+
+        if (!confirmed) return;
+
+        localStorage.removeItem("token");
+
+        window.location.replace("../public/login.html");
+    });
+
     loadOwner();
     loadPets();
     loadAppointments();
