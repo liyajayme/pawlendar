@@ -3,14 +3,14 @@ document.addEventListener("DOMContentLoaded", () => {
     const token = localStorage.getItem("token");
 
     if (!token) {
-        window.location.href = "../public/login.html";
+        window.location.replace("../public/login.html");
         return;
     }
 
     function handleAuthError(res) {
         if (res.status === 401 || res.status === 403) {
             localStorage.removeItem("token");
-            window.location.href = "../public/login.html";
+            window.location.replace("../public/login.html");
             return true;
         }
         return false;
@@ -174,20 +174,6 @@ document.addEventListener("DOMContentLoaded", () => {
         });
 
     }
-
-    const logoutBtn = document.getElementById("logoutBtn");
-
-    logoutBtn.addEventListener("click", (e) => {
-        e.preventDefault();
-
-        const confirmed = confirm("Are you sure you want to log out?");
-
-        if (!confirmed) return;
-
-        localStorage.removeItem("token");
-
-        window.location.replace("../public/login.html");
-    });
 
     loadOwner();
     loadAppointments();

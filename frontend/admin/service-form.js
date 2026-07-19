@@ -4,12 +4,11 @@ document.addEventListener("DOMContentLoaded",()=>{
     const token = localStorage.getItem("token");
 
 
-    if(!token){
-
-        window.location.href="/admin";
+    if (!token) {
+        window.location.replace("../public/login.html");
         return;
-
     }
+
 
 
     document.getElementById("app").style.display="block";
