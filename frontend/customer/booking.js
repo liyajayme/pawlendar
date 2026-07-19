@@ -4,7 +4,7 @@ if (!token) {
     window.location.href = "../public/login.html";
 }
 
-fetch("/api/auth/profile", {
+fetch("http://localhost:3000/api/auth/profile", {
     headers: {
         Authorization: `Bearer ${token}`
     }
@@ -24,6 +24,7 @@ fetch("/api/auth/profile", {
 
 const params = new URLSearchParams(window.location.search);
 const petId = params.get("pet_id");
+let selectedSlot = null;
 
 function showOtherPet() {
     const petType = document.getElementById("petType").value;
@@ -39,7 +40,7 @@ function showOtherPet() {
 
 async function loadOwner() {
 
-    const res = await fetch("/api/users/me", {
+    const res = await fetch("http://localhost:3000/api/users/me", {
         headers: {
             Authorization: `Bearer ${token}`
         }
@@ -62,7 +63,7 @@ async function loadOwner() {
 async function loadPet() {
 
     const res = await fetch(
-        `/api/pets/${petId}`,
+        `http://localhost:3000/api/pets/${petId}`,
         {
             headers: {
                 Authorization: `Bearer ${token}`
@@ -92,7 +93,7 @@ let services = [];
 async function loadServices() {
     
     const res = await fetch(
-        "/api/services"
+        "http://localhost:3000/api/services"
     );
 
     if (!res.ok) return;
@@ -139,57 +140,326 @@ function addServiceListeners() {
 
     checkboxes.forEach(box => {
 
-        box.addEventListener("change", calculateSummary);
+        box.addEventListener("change", ()=>{
+
+        calculateSummary();
+
+        loadAvailableSlots();
+
+});
 
     });
 
 }
 
-function calculateSummary() {
+let packages = [];
+
+
+async function loadPackages(){
+
+    const res = await fetch(
+        "http://localhost:3000/api/packages"
+    );
+
+
+    if(!res.ok) return;
+
+
+    packages = await res.json();
+
+
+    const list =
+        document.getElementById("packageList");
+
+
+    list.innerHTML="";
+
+
+    packages.forEach(pkg=>{
+
+
+        list.innerHTML += `
+
+        <label>
+
+            <span>
+                ${pkg.package_name}
+            </span>
+
+
+            <span>
+                ₱${pkg.package_price}
+            </span>
+
+
+            <input 
+            type="checkbox"
+            value="${pkg.package_id}"
+            data-price="${pkg.package_price}"
+            data-duration="${pkg.package_duration_minutes}"
+            >
+
+        </label>
+
+
+        `;
+
+
+    });
+
+
+    addPackageListeners();
+
+}
+
+function addPackageListeners(){
+
+    const packageInputs =
+        document.querySelectorAll("#packageList input");
+
+
+    packageInputs.forEach(pkg=>{
+
+        pkg.addEventListener(
+            "change",
+            ()=>{
+
+                calculateSummary();
+
+                loadAvailableSlots();
+
+            }
+        );
+
+    });
+
+}
+
+function calculateSummary(){
 
     let total = 0;
 
     let duration = 0;
 
+    selectedSlot = null;
+
+    document.getElementById("slotContainer").innerHTML =
+    "<p>Select a date to see available slots.</p>";
+
+
+    // selected package
     document
-        .querySelectorAll("#serviceList input:checked")
-        .forEach(box => {
+    .querySelectorAll("#packageList input:checked")
+    .forEach(pkg=>{
 
-            total += Number(box.dataset.price);
+        total += Number(pkg.dataset.price);
 
-            duration += Number(box.dataset.duration);
+        duration += Number(pkg.dataset.duration);
 
-        });
+    });
 
-    document.getElementById("totalPrice").textContent =
-        total;
 
-    document.getElementById("duration").textContent =
-        duration + " mins";
+    // selected services
+    document
+    .querySelectorAll("#serviceList input:checked")
+    .forEach(box=>{
+
+        total += Number(box.dataset.price);
+
+        duration += Number(box.dataset.duration);
+
+    });
+
+
+
+    document.getElementById("totalPrice")
+        .textContent = total;
+
+
+    const durationElement = document.getElementById("duration");
+
+    durationElement.textContent = duration + " mins";
+
+    durationElement.dataset.duration = duration;
+
+    const dateInput = document.getElementById("appointment_date");
+
+    if(duration > 0){
+        dateInput.disabled = false;
+    }
+    else{
+        dateInput.disabled = true;
+        document.getElementById("slotContainer").innerHTML =
+        "<p>Select a package or service first.</p>";
+    }
+
 }
+
+
+async function loadAvailableSlots(){
+
+    const date =
+    document.getElementById(
+        "appointment_date"
+    ).value;
+
+
+    const duration =
+    document.getElementById(
+        "duration"
+    ).dataset.duration;
+
+
+
+    if(!date || !duration){
+        return;
+    }
+
+
+
+    const res = await fetch(
+
+        `http://localhost:3000/api/appointments/available-slots?date=${date}&duration=${duration}`,
+
+        {
+            headers:{
+                Authorization:
+                `Bearer ${token}`
+            }
+        }
+
+    );
+
+
+    const slots =
+    await res.json();
+
+
+
+    const container =
+    document.getElementById(
+        "slotContainer"
+    );
+
+
+    container.innerHTML="";
+
+
+
+    if(slots.length===0){
+
+        container.innerHTML =
+        "<p>No available slots.</p>";
+
+        return;
+
+    }
+
+
+
+    slots.forEach(slot=>{
+
+
+        const btn =
+        document.createElement("button");
+
+
+        btn.type="button";
+
+        btn.className="slot-btn";
+
+
+        btn.textContent =
+        slot.time;
+
+
+
+        btn.onclick=()=>{
+
+
+            document
+            .querySelectorAll(".slot-btn")
+            .forEach(b=>
+                b.classList.remove("selected")
+            );
+
+
+            btn.classList.add("selected");
+
+
+            selectedSlot =
+            slot.start_datetime;
+
+
+        };
+
+
+
+        container.appendChild(btn);
+
+
+    });
+
+}
+
+document
+.getElementById("appointment_date")
+.addEventListener(
+"change",
+loadAvailableSlots
+);
 
 document.querySelector("form").addEventListener("submit", async (e) => {
     e.preventDefault();
 
-    const selectedServices = [...document.querySelectorAll("#serviceList input:checked")]
-        .map(cb => Number(cb.value));
+    const selectedServices = [
+        ...document.querySelectorAll("#serviceList input:checked")
+    ]
+    .map(cb => Number(cb.value));
 
-    if (selectedServices.length === 0) {
-        alert("Please select at least one service.");
+
+    const selectedPackages = [
+        ...document.querySelectorAll("#packageList input:checked")
+    ].map(pkg => Number(pkg.value));
+
+
+    if (
+        selectedServices.length === 0 &&
+        selectedPackages.length === 0
+    ) {
+        alert("Please select at least one package or service.");
         return;
     }
 
+
+    if(!selectedSlot){
+
+        alert("Please select an available time slot.");
+        return;
+
+    }
+
+
     const appointment = {
-        pet_id: Number(petId),
-        start_datetime:
-            `${document.getElementById("appointment_date").value}T${document.getElementById("appointment_time").value}:00`,
-        notes: document.getElementById("notes").value,
-        service_ids: [...document.querySelectorAll("#serviceList input:checked")]
-            .map(cb => Number(cb.value)),
-        staff_id: null
+
+        pet_id:Number(petId),
+
+        start_datetime:selectedSlot,
+
+        notes:
+        document.getElementById("notes").value,
+
+
+        service_ids:selectedServices,
+
+
+        package_ids: selectedPackages,
+
+
+        staff_id:null
     };
 
-    const res = await fetch("/api/appointments", {
+    const res = await fetch("http://localhost:3000/api/appointments", {
         method: "POST",
         headers: {
             "Content-Type": "application/json",
@@ -208,9 +478,12 @@ document.querySelector("form").addEventListener("submit", async (e) => {
     alert("Appointment booked successfully!");
 
     // Redirect back to dashboard
-    window.location.href = "dashboard.html";
+    window.location.href = "dashboard-dev.html";
 });
+
+
 
 loadOwner();
 loadPet();
 loadServices();
+loadPackages();

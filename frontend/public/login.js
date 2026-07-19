@@ -9,7 +9,7 @@ form.addEventListener("submit", async (e) => {
 
     try {
         const response = await fetch(
-            "/api/auth/login",
+            "http://localhost:3000/api/auth/login",
             {
                 method: "POST",
                 headers: {

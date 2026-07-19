@@ -28,7 +28,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
         try {
 
-            const res = await fetch("/api/users/me", {
+            const res = await fetch("http://localhost:3000/api/users/me", {
 
                 headers: {
                     Authorization: `Bearer ${token}`
@@ -45,10 +45,10 @@ document.addEventListener("DOMContentLoaded", () => {
             document.querySelector(".owner-name").textContent =
                 `${owner.first_name} ${owner.last_name}`;
 
-            document.querySelector(".owner-email").textContent =
+            document.querySelector(".owner-email span").textContent =
                 owner.email;
 
-            document.querySelector(".owner-phone").textContent =
+            document.querySelector(".owner-phone span").textContent =
                 owner.phone_number;
 
         }
@@ -76,7 +76,7 @@ document.addEventListener("DOMContentLoaded", () => {
             size: document.getElementById("size").value || null
         };
 
-        const res = await fetch("/api/pets", {
+        const res = await fetch("http://localhost:3000/api/pets", {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",

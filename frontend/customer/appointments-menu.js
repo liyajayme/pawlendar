@@ -46,7 +46,7 @@ document.addEventListener("DOMContentLoaded", () => {
     // ---------------- OWNER ----------------
     async function loadOwner() {
         try {
-            const res = await fetch("/api/users/me", {
+            const res = await fetch("http://localhost:3000/api/users/me", {
                 headers: {
                     "Authorization": `Bearer ${token}`
                 }
@@ -64,10 +64,10 @@ document.addEventListener("DOMContentLoaded", () => {
             document.querySelector(".owner-name").textContent =
                 `${owner.first_name} ${owner.last_name}`;
 
-            document.querySelector(".owner-email").textContent =
+            document.querySelector(".owner-email span").textContent =
                 owner.email;
 
-            document.querySelector(".owner-phone").textContent =
+            document.querySelector(".owner-phone span").textContent =
                 owner.phone_number;
 
         } catch (err) {
@@ -77,7 +77,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
     async function loadAppointments() {
 
-        const res = await fetch("/api/appointments", {
+        const res = await fetch("http://localhost:3000/api/appointments", {
             headers: {
                 "Authorization": `Bearer ${token}`
             }
