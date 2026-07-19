@@ -1,9 +1,7 @@
 @import url("../styles.css");
 
 
-/* ===========================
-   HERO
-=========================== */
+/* HERO */
 
 .staff-hero{
 
@@ -43,9 +41,8 @@
 }
 
 
-/* ===========================
-   BUTTON
-=========================== */
+
+/* BUTTON */
 
 .add-staff-btn{
 
@@ -82,9 +79,9 @@
 
 
 
-/* ===========================
-   MAIN CARD
-=========================== */
+
+
+/* CARD */
 
 
 .staff-wrapper{
@@ -96,7 +93,6 @@
 }
 
 
-
 .staff-card{
 
     background:white;
@@ -105,10 +101,11 @@
 
     padding:35px;
 
-    box-shadow:
-    0 15px 40px rgba(74,35,40,.08);
+    box-shadow:0 15px 40px rgba(74,35,40,.08);
 
 }
+
+
 
 
 
@@ -125,7 +122,6 @@
 }
 
 
-
 .staff-title h2{
 
     color:#4A2328;
@@ -135,23 +131,13 @@
 }
 
 
-/* ===========================
- SEARCH
-=========================== */
 
 
-.staff-actions{
 
-    margin-bottom:30px;
-
-}
+.staff-title input{
 
 
-.staff-actions input{
-
-    width:100%;
-
-    padding:14px 18px;
+    padding:12px 18px;
 
     border:1px solid #ddd;
 
@@ -159,28 +145,31 @@
 
     font-size:15px;
 
-    outline:none;
+    width:300px;
 
 }
 
 
-.staff-actions input:focus{
+
+
+.staff-title input:focus{
+
+    outline:none;
 
     border-color:#9F5F80;
 
-    box-shadow:
-    0 0 0 3px rgba(159,95,128,.15);
+    box-shadow:0 0 0 3px rgba(159,95,128,.15);
 
 }
 
 
 
-/* ===========================
- TABLE
-=========================== */
 
 
-.appointment-table{
+/* TABLE */
+
+
+.staff-table{
 
     width:100%;
 
@@ -189,16 +178,14 @@
 }
 
 
-
-.appointment-table thead{
+.staff-table thead{
 
     background:#F8F4EF;
 
 }
 
 
-
-.appointment-table th{
+.staff-table th{
 
     padding:18px;
 
@@ -206,33 +193,23 @@
 
     color:#4A2328;
 
-    font-size:15px;
-
 }
 
 
 
-.appointment-table td{
+.staff-table td{
 
     padding:18px;
 
     color:#5C3338;
 
-    border-bottom:
-    1px solid #F2F2F2;
+    border-bottom:1px solid #F2F2F2;
 
 }
 
 
 
-.appointment-table tbody tr{
-
-    transition:.25s;
-
-}
-
-
-.appointment-table tbody tr:hover{
+.staff-table tbody tr:hover{
 
     background:#FFF8EF;
 
@@ -240,30 +217,29 @@
 
 
 
-/* ===========================
- ACTION BUTTON
-=========================== */
 
 
-.appointment-table button{
+/* ACTION */
 
-    border:none;
+
+.staff-table button{
 
     background:#C1EBE9;
+
+    border:none;
 
     padding:10px 18px;
 
     border-radius:12px;
 
-    font-weight:600;
-
     cursor:pointer;
+
+    font-weight:600;
 
 }
 
 
-
-.appointment-table button:hover{
+.staff-table button:hover{
 
     background:#A8DDDA;
 
@@ -271,38 +247,14 @@
 
 
 
-/* ===========================
- DETAILS
-=========================== */
 
 
-#staffDetails{
-
-    width:min(1400px,92%);
-
-    margin:60px auto;
-
-}
-
+/* DETAILS */
 
 
 #detailsContainer{
 
-    background:white;
-
-    border-radius:25px;
-
-    padding:35px;
-
-    box-shadow:
-    0 15px 40px rgba(74,35,40,.08);
-
-}
-
-
-#detailsContainer h3{
-
-    color:#4A2328;
+    margin-top:20px;
 
 }
 
@@ -317,9 +269,7 @@
 
 
 
-/* ===========================
- MOBILE
-=========================== */
+
 
 @media(max-width:1000px){
 
@@ -331,16 +281,16 @@
 }
 
 
-.staff-card{
+.staff-table{
 
-    overflow:auto;
+    min-width:900px;
 
 }
 
 
-.appointment-table{
+.staff-card{
 
-    min-width:900px;
+    overflow:auto;
 
 }
 

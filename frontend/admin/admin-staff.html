@@ -23,195 +23,172 @@
 <div id="app" style="display:none;">
 
 
-    <header class="navbar">
+<header class="navbar">
 
-        <a href="admin-dashboard.html" class="brand brand-dark">
+    <a href="admin-dashboard.html" class="brand brand-dark">
 
-            <svg width="30" height="30" viewBox="0 0 30 30" fill="none">
+        <svg width="30" height="30" viewBox="0 0 30 30" fill="none">
+            <ellipse cx="15" cy="18" rx="6.5" ry="5.5" fill="var(--clay)" />
+            <circle cx="8.5" cy="9.5" r="3" fill="var(--clay)" />
+            <circle cx="15" cy="6.5" r="3" fill="var(--clay)" />
+            <circle cx="21.5" cy="9.5" r="3" fill="var(--clay)" />
+        </svg>
 
-                <ellipse cx="15" cy="18" rx="6.5" ry="5.5" fill="var(--clay)" />
+        <span>Pawlendar</span>
 
-                <circle cx="8.5" cy="9.5" r="3" fill="var(--clay)" />
+    </a>
 
-                <circle cx="15" cy="6.5" r="3" fill="var(--clay)" />
 
-                <circle cx="21.5" cy="9.5" r="3" fill="var(--clay)" />
+    <nav class="nav-list">
 
-            </svg>
+        <a href="admin-dashboard.html">Dashboard</a>
+        <a href="admin-appointment.html">Appointments</a>
+        <a href="admin-calendar.html">Calendar</a>
+        <a href="admin-services.html">Services</a>
+        <a href="admin-staff.html">Staff</a>
 
-            <span>Pawlendar</span>
+    </nav>
+
+
+    <div class="nav-auth">
+
+        <a href="#" id="logoutBtn" class="btn-ghost-small">
+            Logout
+        </a>
+
+    </div>
+
+
+</header>
+
+
+
+
+<section class="staff-hero paws-bg">
+
+
+    <div class="staff-content">
+
+        <h1>
+            Staff Management
+        </h1>
+
+
+        <p>
+            Manage groomers, their information, and weekly availability.
+        </p>
+
+
+        <a href="admin-staff-form.html" class="add-staff-btn">
+
+            <i class="fa-solid fa-plus"></i>
+
+            Add Groomer
 
         </a>
 
 
+    </div>
 
-        <nav class="nav-list">
 
-            <a href="admin-dashboard.html">Dashboard</a>
+</section>
 
-            <a href="admin-appointment.html">Appointments</a>
 
-            <a href="admin-calendar.html">Calendar</a>
 
-            <a href="admin-services.html">Services</a>
 
-            <a href="admin-staff.html">Staff</a>
 
-        </nav>
 
+<section class="staff-wrapper">
 
 
-        <div class="nav-auth">
+<div class="staff-card">
 
-            <a href="#" id="logoutBtn" class="btn-ghost-small">
-                Logout
-            </a>
 
-        </div>
+<div class="staff-title">
 
 
-    </header>
+<h2>
+    Groomers
+</h2>
 
 
+<input 
+    type="text"
+    id="searchInput"
+    placeholder="Search groomer..."
+>
 
 
-    <!-- HERO -->
+</div>
 
-    <section class="staff-hero paws-bg">
 
-        <div class="staff-content">
 
-            <h1>Staff Management</h1>
 
-            <p>
-                Manage groomers, their information, and weekly availability.
-            </p>
 
-        </div>
+<table class="staff-table">
 
-    </section>
 
+<thead>
 
+<tr>
 
+<th>ID</th>
+<th>Name</th>
+<th>Specialization</th>
+<th>Phone</th>
+<th>Email</th>
+<th>Action</th>
 
+</tr>
 
-    <!-- STAFF TABLE -->
+</thead>
 
-    <section class="services-wrapper">
 
 
-        <div class="services-card">
+<tbody id="staffTableBody">
 
+</tbody>
 
-            <div class="services-title">
 
 
-                <h2>
-                    Groomers
-                </h2>
+</table>
 
 
-                <span id="staffCount">
-                    0 Groomers
-                </span>
 
+</div>
 
-            </div>
 
+</section>
 
 
 
-            <div class="staff-search">
 
 
-                <input
-                    type="text"
-                    id="searchInput"
-                    placeholder="Search groomer..."
-                >
 
+<section id="staffDetails" style="display:none;">
 
-            </div>
 
+<div class="staff-wrapper">
 
 
+<div class="staff-card">
 
 
-            <table class="services-table">
+<h2>
+Groomer Details
+</h2>
 
 
-                <thead>
+<div id="detailsContainer"></div>
 
 
-                    <tr>
+</div>
 
-                        <th>ID</th>
 
-                        <th>Name</th>
+</div>
 
-                        <th>Specialization</th>
 
-                        <th>Phone</th>
-
-                        <th>Email</th>
-
-                        <th>Actions</th>
-
-                    </tr>
-
-
-                </thead>
-
-
-
-                <tbody id="staffTableBody">
-
-
-                </tbody>
-
-
-
-            </table>
-
-
-
-        </div>
-
-
-    </section>
-
-
-
-
-
-
-    <!-- DETAILS -->
-
-    <section 
-        id="staffDetails"
-        style="display:none;"
-        class="services-wrapper">
-
-
-        <div class="services-card">
-
-
-            <h2>
-                Groomer Details
-            </h2>
-
-
-            <div id="detailsContainer">
-
-
-            </div>
-
-
-
-        </div>
-
-
-    </section>
+</section>
 
 
 
