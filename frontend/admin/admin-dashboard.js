@@ -6,12 +6,11 @@ async function loadDashboard(){
     const token = localStorage.getItem("token");
 
 
-    if(!token){
-
-        window.location.href = "/admin";
+    if (!token) {
+        window.location.replace("../public/login.html");
         return;
-
     }
+
 
 
     try{

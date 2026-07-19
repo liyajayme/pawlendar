@@ -1,6 +1,6 @@
 const token = localStorage.getItem("token");
 if (!token) {
-    window.location.href = "/admin";
+    window.location.replace("../public/login.html");
 }
 
 loadAppointments();
