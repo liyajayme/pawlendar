@@ -66,12 +66,32 @@ function displayGroomers(list){
 
         <td>
 
+
         <button
         onclick="viewStaff(${staff.staff_id})">
 
         View
 
         </button>
+
+
+
+        <button
+        onclick="editStaff(${staff.staff_id})">
+
+        Edit
+
+        </button>
+
+
+
+        <button
+        onclick="deleteStaff(${staff.staff_id})">
+
+        Delete
+
+        </button>
+
 
         </td>
 
@@ -233,6 +253,87 @@ async function viewStaff(id){
     </button>
 
     `;
+
+}
+
+function editStaff(id){
+
+
+    window.location.href =
+    `admin-staff-form-edit.html?id=${id}`;
+
+
+}
+
+
+
+
+
+async function deleteStaff(id){
+
+
+    const confirmDelete =
+    confirm(
+        "Deactivate this groomer?"
+    );
+
+
+    if(!confirmDelete)
+        return;
+
+
+
+
+    const response = await fetch(
+
+        `/api/admin/groomers/${id}`,
+
+        {
+
+            method:"DELETE",
+
+            headers:{
+
+                Authorization:
+                "Bearer " + token
+
+            }
+
+        }
+
+    );
+
+
+
+    const data =
+    await response.json();
+
+
+
+
+    if(response.ok){
+
+
+        alert(
+            "Groomer removed successfully"
+        );
+
+
+        loadGroomers();
+
+
+    }
+    else{
+
+
+        alert(
+            data.message ||
+            "Delete failed"
+        );
+
+
+    }
+
 
 }
 
