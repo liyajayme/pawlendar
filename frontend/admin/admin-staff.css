@@ -9,20 +9,21 @@
 }
 
 .staff-content{
-    width:min(1400px,92%);
-    margin:0 auto;
+    width:min(1200px,90%);
+    margin:auto;
+    text-align:center;
 }
 
 .staff-content h1{
-    font-size:64px;
+    font-size:48px;
     color:#4A2328;
-    margin-bottom:18px;
+    margin-bottom:15px;
 }
 
 .staff-content p{
-    font-size:22px;
     color:#6B4B4B;
-    margin-bottom:35px;
+    font-size:18px;
+    margin-bottom:30px;
 }
 
 /* ===================================================
@@ -58,22 +59,17 @@
 
 .staff-wrapper{
     width:min(1400px,92%);
-    margin:70px auto;
+    margin:60px auto;
 }
-
 /* ===================================================
    CARD
 =================================================== */
 
 .staff-card{
     background:#fff;
-
-    border-radius:30px;
-
-    padding:40px;
-
-    box-shadow:
-        0 15px 40px rgba(74,35,40,.08);
+    border-radius:25px;
+    padding:35px;
+    box-shadow:0 15px 40px rgba(74,35,40,.08);
 }
 
 /* ===================================================
@@ -84,26 +80,21 @@
     display:flex;
     justify-content:space-between;
     align-items:center;
-
-    gap:30px;
-
-    margin-bottom:35px;
+    gap:20px;
+    margin-bottom:30px;
 }
 
 .staff-title h2{
-    font-size:54px;
+    font-size:34px;
     color:#4A2328;
 }
 
 .staff-title input{
-    width:340px;
-
-    padding:15px 20px;
-
+    width:300px;
+    padding:12px 16px;
     border:1px solid #DDD;
-    border-radius:15px;
-
-    font-size:16px;
+    border-radius:12px;
+    font-size:15px;
 }
 
 .staff-title input:focus{
@@ -115,36 +106,36 @@
 /* ===================================================
    TABLE
 =================================================== */
-
 .staff-table{
     width:100%;
     border-collapse:collapse;
 }
 
 .staff-table thead{
-    background:#F6F1EB;
+    background:#F8F4EF;
 }
 
 .staff-table th{
-    padding:22px;
-    text-align:left;
-
-    font-size:17px;
+    padding:18px;
     color:#4A2328;
+    text-align:left;
+    font-size:15px;
 }
 
 .staff-table td{
-    padding:22px;
-    border-bottom:1px solid #EEE;
-
+    padding:18px;
     color:#5C3338;
-    vertical-align:middle;
+    border-bottom:1px solid #F2F2F2;
+    vertical-align:top;
+}
+
+.staff-table tbody tr{
+    transition:.25s;
 }
 
 .staff-table tbody tr:hover{
-    background:#FFF9F2;
+    background:#FFF8EF;
 }
-
 /* ===================================================
    ACTIONS
 =================================================== */
@@ -152,20 +143,14 @@
 .staff-table td:last-child{
     white-space:nowrap;
 }
-
 .staff-table button{
     border:none;
     cursor:pointer;
-
     padding:10px 18px;
-
-    border-radius:14px;
-
-    font-weight:700;
-
+    border-radius:12px;
+    font-weight:600;
     margin-right:8px;
-
-    transition:.2s;
+    transition:.25s;
 }
 
 .staff-table button:hover{
@@ -232,10 +217,10 @@
     }
 
     .staff-card{
-        overflow-x:auto;
+    overflow:auto;
     }
 
     .staff-table{
-        min-width:900px;
+        min-width:950px;
     }
 }
