@@ -1,51 +1,86 @@
-.dashboard-layout {
-    min-height: calc(100vh - 150px);
-    display: flex;
-    gap: 25px;
-    padding: 25px;
-    background: #FFF9E6;
+@import url("../styles.css");
+
+/* ===================================================
+   PAGE LAYOUT
+=================================================== */
+
+.dashboard-layout{
+    width:min(1100px,92%);
+    margin:50px auto 70px;
 }
 
 .content-panel{
-    flex:1;
-    background: white;
+    background:#FFFFFF;
     border-radius:25px;
-    box-shadow:0 12px 30px rgba(74,35,40,.08); 
+    box-shadow:0 15px 40px rgba(74,35,40,.08);
+    overflow:hidden;
 }
 
-.content-wrapper {
-    padding: 30px;
+.content-wrapper{
+    padding:40px;
 }
+
+/* ===================================================
+   HEADER
+=================================================== */
 
 .content-panel .dashboard-header{
-    background: none;
-    box-shadow: none;
+    background:none;
+    box-shadow:none;
+    padding:0;
 }
 
-.dashboard-header h1 {
-    font-size: 32px;
-    color: #4A2328;
-    margin-bottom: 8px;
+.dashboard-header h1{
+    font-size:40px;
+    color:#4A2328;
+    margin-bottom:12px;
+    font-weight:700;
 }
 
-.dashboard-header p {
-    font-size: 15px;
-    color: #5C3338;
-    line-height: 1.5;
+.dashboard-header p{
+    font-size:17px;
+    color:#6B4B4B;
+    line-height:1.7;
+    max-width:700px;
 }
 
-.content-wrapper hr {
-    border: none;
-    height: 1px;
-    background: #ECECEC;
-    margin: 25px 0;
+.content-wrapper hr{
+    border:none;
+    height:1px;
+    background:#ECECEC;
+    margin:30px 0 35px;
 }
+
+/* ===================================================
+   FORM
+=================================================== */
 
 #staffForm{
     display:flex;
     flex-direction:column;
-    gap:15px;
+    gap:24px;
 }
+
+.form-row{
+    display:grid;
+    gap:22px;
+}
+
+.two-columns{
+    grid-template-columns:repeat(2,1fr);
+}
+
+.four-columns{
+    grid-template-columns:
+        1fr
+        1.2fr
+        .8fr
+        1fr;
+}
+
+/* ===================================================
+   INPUT GROUPS
+=================================================== */
 
 .input-group{
     display:flex;
@@ -53,33 +88,44 @@
 }
 
 .input-group label{
-    color:#4A2328;
+    font-size:15px;
     font-weight:600;
-    margin-bottom:5px;
-    font-size: 13px;
+    color:#4A2328;
+    margin-bottom:8px;
 }
 
 .input-group input,
 .input-group select,
 .input-group textarea{
     width:100%;
-    padding:10px 13px;
-    border-radius:10px;
-    border:1.5px solid #F0E4D7;
+    box-sizing:border-box;
+
+    padding:15px 18px;
+
+    border:1px solid #E8DDD2;
+    border-radius:12px;
+
     background:#FAFAFA;
+
     color:#4A2328;
-    font-size:13px;
-    transition:.25s;
+    font-size:15px;
     font-family:inherit;
+
+    transition:.25s;
+}
+
+.input-group input::placeholder,
+.input-group textarea::placeholder{
+    color:#A59A91;
 }
 
 .input-group input:focus,
 .input-group select:focus,
 .input-group textarea:focus{
     outline:none;
+    background:#FFFFFF;
     border-color:#F5AC53;
-    background:white;
-    box-shadow:0 0 0 4px rgba(245,172,83,.15);
+    box-shadow:0 0 0 4px rgba(245,172,83,.18);
 }
 
 .input-group textarea{
@@ -97,40 +143,63 @@
     border-color:#F5AC53;
 }
 
+/* ===================================================
+   ERROR
+=================================================== */
+
+.form-error{
+    color:#C0392B;
+    font-size:14px;
+    margin-top:-10px;
+}
+
+/* ===================================================
+   BUTTONS
+=================================================== */
+
+.panel-buttons{
+    display:flex;
+    justify-content:flex-end;
+    gap:15px;
+    margin-top:10px;
+}
+
+.main-btn,
+.outline-btn{
+    display:inline-flex;
+    justify-content:center;
+    align-items:center;
+
+    min-width:180px;
+
+    padding:14px 30px;
+
+    border-radius:12px;
+
+    font-size:15px;
+    font-weight:700;
+
+    font-family:inherit;
+
+    cursor:pointer;
+
+    transition:.25s;
+
+    text-decoration:none;
+}
+
 .main-btn{
-    background: var(--gold);
-    color: var(--pine);
-    font-family: inherit;
-    font-weight: 700;
-    border: none;
-    border-radius: 10px;
-    cursor: pointer;
-    transition: background .18s ease, transform .18s ease, box-shadow .18s ease;
+    background:var(--gold);
+    color:var(--pine);
+    border:none;
 }
 
 .main-btn:hover{
-    background: var(--gold-deep);
-    transform: translateY(-1px);
-    box-shadow: 0 8px 18px rgba(232, 172, 61, 0.35);
+    background:var(--gold-deep);
+    transform:translateY(-2px);
+    box-shadow:0 10px 20px rgba(232,172,61,.30);
 }
 
-.outline-btn{
-    background: transparent;
-    color: var(--clay);
-    font-family: inherit;
-    border: 1.5px solid var(--clay);
-    border-radius: 10px;
-    cursor: pointer;
-    transition: background .18s ease, color .18s ease, transform .18s ease;
-}
-
-.outline-btn:hover{
-    background: var(--clay);
-    color: var(--cream);
-    transform: translateY(-1px);
-}
-
-/* disabled state while saving */
 .main-btn:disabled{
     opacity:.6;
     cursor:not-allowed;
@@ -138,60 +207,62 @@
     box-shadow:none;
 }
 
-.form-error{
-    color:#C0392B;
-    font-size:13px;
-    margin:-5px 0 0;
+.outline-btn{
+    background:transparent;
+    color:var(--clay);
+    border:2px solid var(--clay);
 }
 
-.panel-buttons{
-    display:flex;
-    justify-content:flex-end;
-    gap:16px;
-    margin-top:5px;
+.outline-btn:hover{
+    background:var(--clay);
+    color:var(--cream);
+    transform:translateY(-2px);
 }
 
-.panel-buttons .outline-btn{
-    text-decoration:none;
-    display:inline-flex;
-    justify-content:center;
-    align-items:center;
-    padding:10px 25px;
-    font-size:13px;
-}
-
-.panel-buttons .main-btn{
-    padding:10px 25px;
-    min-width:170px;
-    font-size:13px;
-}
-
-.form-row{
-    display:grid;
-    gap:15px;
-}
-
-.two-columns{
-    grid-template-columns:repeat(2,1fr);
-}
-
-.four-columns{
-    grid-template-columns:
-        1fr
-        1.2fr
-        .8fr
-        1fr;
-}
+/* ===================================================
+   MOBILE
+=================================================== */
 
 @media (max-width:900px){
+
+    .dashboard-layout{
+        width:95%;
+    }
+
+    .content-wrapper{
+        padding:30px;
+    }
+
+    .dashboard-header h1{
+        font-size:32px;
+    }
+
+    .dashboard-header p{
+        font-size:15px;
+    }
+
     .four-columns{
         grid-template-columns:repeat(2,1fr);
     }
 }
 
 @media (max-width:650px){
+
+    .content-wrapper{
+        padding:25px;
+    }
+
     .two-columns,
     .four-columns{
         grid-template-columns:1fr;
+    }
+
+    .panel-buttons{
+        flex-direction:column-reverse;
+    }
+
+    .main-btn,
+    .outline-btn{
+        width:100%;
     }
 }
