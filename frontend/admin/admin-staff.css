@@ -309,7 +309,56 @@
     border-top:1px solid #ECECEC;
     margin:25px 0;
 }
+/* ===================================================
+   DETAILS ACTION BUTTONS
+=================================================== */
 
+.details-actions{
+    display:flex;
+    gap:12px;
+    margin-top:25px;
+    flex-wrap:wrap;
+}
+
+.details-actions button{
+    display:inline-flex;
+    align-items:center;
+    gap:8px;
+
+    border:none;
+    cursor:pointer;
+
+    padding:12px 22px;
+
+    border-radius:12px;
+
+    font-size:15px;
+    font-weight:600;
+
+    transition:.25s;
+}
+
+.details-actions button:hover{
+    transform:translateY(-2px);
+}
+
+.details-actions .edit-btn{
+    background:#CBEDED;
+    color:#235857;
+}
+
+.details-actions .edit-btn:hover{
+    background:#B8E5E5;
+}
+
+.details-actions .delete-btn{
+    background:#FFDADA;
+    color:#B12828;
+}
+
+.details-actions .delete-btn:hover{
+    background:#FFC9C9;
+}
 /* ===================================================
    MOBILE
 =================================================== */
