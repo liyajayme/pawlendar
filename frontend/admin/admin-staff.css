@@ -205,6 +205,112 @@
 }
 
 /* ===================================================
+   GROOMER DETAILS
+=================================================== */
+
+#detailsContainer{
+    margin-top:25px;
+}
+
+#detailsContainer h3{
+    font-size:30px;
+    color:#4A2328;
+    margin-bottom:10px;
+}
+
+#detailsContainer h4{
+    margin:30px 0 15px;
+    font-size:20px;
+    color:#4A2328;
+}
+
+#detailsContainer p{
+    margin-bottom:10px;
+    color:#5C3338;
+    line-height:1.7;
+}
+
+#detailsContainer strong{
+    color:#4A2328;
+}
+
+/* ===================================================
+   WEEKLY SCHEDULE TABLE
+=================================================== */
+
+#detailsContainer table{
+    width:100%;
+    border-collapse:collapse;
+    margin-top:20px;
+    overflow:hidden;
+    border-radius:15px;
+}
+
+#detailsContainer thead{
+    background:#F8F4EF;
+}
+
+#detailsContainer th{
+    padding:16px;
+    text-align:left;
+    font-size:15px;
+    color:#4A2328;
+    font-weight:700;
+}
+
+#detailsContainer td{
+    padding:16px;
+    border-bottom:1px solid #F2F2F2;
+    color:#5C3338;
+}
+
+#detailsContainer tbody tr{
+    transition:.25s;
+}
+
+#detailsContainer tbody tr:hover{
+    background:#FFF8EF;
+}
+
+/* ===================================================
+   STATUS BADGES
+=================================================== */
+
+#detailsContainer .available{
+    display:inline-block;
+    padding:6px 14px;
+    border-radius:30px;
+    background:#DFF6E5;
+    color:#2E7D32;
+    font-weight:600;
+    font-size:13px;
+}
+
+#detailsContainer .unavailable{
+    display:inline-block;
+    padding:6px 14px;
+    border-radius:30px;
+    background:#FFE2E2;
+    color:#B12828;
+    font-weight:600;
+    font-size:13px;
+}
+
+/* ===================================================
+   DETAILS CARD SECTIONS
+=================================================== */
+
+#detailsContainer > div{
+    margin-bottom:30px;
+}
+
+#detailsContainer hr{
+    border:none;
+    border-top:1px solid #ECECEC;
+    margin:25px 0;
+}
+
+/* ===================================================
    MOBILE
 =================================================== */
 
