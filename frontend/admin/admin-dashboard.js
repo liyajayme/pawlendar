@@ -1,172 +1,426 @@
-loadDashboard();
+document.addEventListener("DOMContentLoaded", loadDashboard)
+
 
 async function loadDashboard(){
 
     const token = localStorage.getItem("token");
 
-    if (!token) {
+
+    if(!token){
+
         window.location.href = "http://localhost:3000/admin";
         return;
+
     }
 
-    const response = await fetch(
-        "http://localhost:3000/api/admin/stats",
-        {
-            headers:{
-                "Authorization":"Bearer " + token
+
+    try{
+
+
+        const response = await fetch(
+            "http://localhost:3000/api/admin/stats",
+            {
+                headers:{
+                    "Authorization":"Bearer " + token
+                }
             }
+        );
+
+
+        if(!response.ok){
+
+            console.error(await response.text());
+
+            alert("Session expired. Please login again.");
+
+            localStorage.removeItem("token");
+
+            window.location.replace(
+                "http://localhost:3000/admin"
+            );
+
+            return;
+
         }
-    );
 
-    if(!response.ok){
 
-        window.location.replace("http://localhost:3000/admin");
-        alert("Failed to load dashboard");
 
-        return;
+        const data = await response.json();
+
+
+
+        document.getElementById("app").style.display = "block";
+
+
+
+        loadStats(data.stats || {});
+
+
+        loadUpcoming(
+            data.upcoming || []
+        );
+
+
+        loadActivity(
+            data.activity || []
+        );
+
+
+
+        document.getElementById("lastUpdated").textContent =
+            new Date().toLocaleString();
+
+
 
     }
+    catch(error){
 
-    document.getElementById("app").style.display = "block";
+        console.error(
+            "Dashboard error:",
+            error
+        );
 
-    const data = await response.json();
+        alert(
+            "Unable to connect to server."
+        );
 
-    loadStats(data.stats);
-
-    loadUpcoming(data.upcoming);
-
-    loadActivity(data.activity);
-
-    document.getElementById("lastUpdated").textContent =
-    new Date().toLocaleString();// hmmm
+    }
 
 }
+
+
+
+
 
 function loadStats(stats){
 
-    document.getElementById("todayAppointments").textContent =
-    stats.todayAppointments;
 
-    document.getElementById("checkedInPets").textContent =
-    stats.checkedInPets;
+    const setText = (id,value)=>{
 
-    document.getElementById("groomingPets").textContent =
-    stats.groomingPets;
+        const element =
+            document.getElementById(id);
 
-    document.getElementById("readyForPickup").textContent =
-    stats.readyForPickup;
 
-    document.getElementById("completedAppointments").textContent =
-    stats.completedAppointments;
+        if(element){
 
-    document.getElementById("cancelledAppointments").textContent =
-    stats.cancelledAppointments;
+            element.textContent =
+                value ?? 0;
 
-    document.getElementById("todayRevenue").textContent =
-    "₱" + stats.todayRevenue;
+        }
+
+    };
+
+
+
+    setText(
+        "todayAppointments",
+        stats.todayAppointments
+    );
+
+
+    setText(
+        "checkedInPets",
+        stats.checkedInPets
+    );
+
+
+    setText(
+        "groomingPets",
+        stats.groomingPets
+    );
+
+
+    setText(
+        "readyForPickup",
+        stats.readyForPickup
+    );
+
+
+    setText(
+        "completedAppointments",
+        stats.completedAppointments
+    );
+
+
+    setText(
+        "cancelledAppointments",
+        stats.cancelledAppointments
+    );
+
+
+
+    setMoney(
+        "todayRevenue",
+        stats.todayRevenue
+    );
+
+
+    setMoney(
+        "monthlyRevenue",
+        stats.monthlyRevenue
+    );
+
+
+    setMoney(
+        "averageSale",
+        stats.averageSale
+    );
+
+
+
+    setText(
+        "totalCustomers",
+        stats.totalCustomers
+    );
+
+
+    setText(
+        "totalPets",
+        stats.totalPets
+    );
+
+
+    setText(
+        "activeGroomers",
+        stats.activeGroomers
+    );
+
+
+    setText(
+        "bronzeMembers",
+        stats.bronzeMembers
+    );
+
+
+    setText(
+        "silverMembers",
+        stats.silverMembers
+    );
+
+
+    setText(
+        "goldMembers",
+        stats.goldMembers
+    );
+
 
 }
+
+
+
+
+
+function setMoney(id,value){
+
+
+    const element =
+        document.getElementById(id);
+
+
+    if(element){
+
+        element.textContent =
+            "₱" +
+            Number(value || 0)
+            .toLocaleString(
+                "en-PH",
+                {
+                    minimumFractionDigits:2
+                }
+            );
+
+    }
+
+}
+
+
+
+
+
+
 
 function loadUpcoming(appointments){
 
+
     const table =
-    document.getElementById("upcomingTable");
+        document.getElementById(
+            "upcomingTable"
+        );
 
-    let html = "";
 
-    appointments.forEach(app=>{
+    if(!table)
+        return;
 
-        html += `
 
-        <tr>
 
-            <td>
+    if(appointments.length === 0){
 
-                ${new Date(app.start_datetime)
-                    .toLocaleTimeString([],{
-                        hour:"2-digit",
-                        minute:"2-digit"
-                    })}
+        table.innerHTML = `
 
-            </td>
+            <tr>
 
-            <td>
+                <td colspan="4">
+                    No upcoming appointments
+                </td>
 
-                ${app.pet_name}
-
-            </td>
-
-            <td>
-
-                ${app.first_name}
-                ${app.last_name}
-
-            </td>
-
-            <td>
-
-                ${
-                app.staff_first_name
-                ?
-                app.staff_first_name + " " + app.staff_last_name
-                :
-                "Unassigned"
-                }
-
-            </td>
-
-        </tr>
+            </tr>
 
         `;
 
-    });
+        return;
 
-    table.innerHTML = html;
+    }
+
+
+
+    table.innerHTML =
+        appointments.map(app=>{
+
+
+            const time =
+                new Date(
+                    app.start_datetime
+                )
+                .toLocaleTimeString(
+                    [],
+                    {
+                        hour:"2-digit",
+                        minute:"2-digit"
+                    }
+                );
+
+
+
+            const groomer =
+                app.staff_first_name
+                ?
+                `${app.staff_first_name}
+                 ${app.staff_last_name}`
+                :
+                "Unassigned";
+
+
+
+            return `
+
+                <tr>
+
+                    <td>
+                        ${time}
+                    </td>
+
+
+                    <td>
+                        ${app.pet_name}
+                    </td>
+
+
+                    <td>
+                        ${app.first_name}
+                        ${app.last_name}
+                    </td>
+
+
+                    <td>
+                        ${groomer}
+                    </td>
+
+
+                </tr>
+
+
+            `;
+
+
+        }).join("");
 
 }
 
+
+
+
+
+
+
+
 function loadActivity(activity){
 
+
     const container =
-    document.getElementById("activityList");
+        document.getElementById(
+            "activityList"
+        );
 
-    let html = "";
 
-    activity.forEach(item=>{
+    if(!container)
+        return;
 
-        html += `
 
-        <div class="activity-item">
 
-            <strong>
 
-                ${item.pet_name}
+    if(activity.length === 0){
 
-            </strong>
 
-            was
+        container.innerHTML = `
 
-            <strong>
-
-                ${item.status}
-
-            </strong>
-
-            <br>
-
-            <small>
-
-                ${new Date(item.updated_at)
-                    .toLocaleString()}
-
-            </small>
-
-        </div>
+            <p>
+                No recent activity
+            </p>
 
         `;
 
-    });
+        return;
 
-    container.innerHTML = html;
+    }
+
+
+
+
+    container.innerHTML =
+
+        activity.map(item=>{
+
+
+            return `
+
+            <div class="activity-item">
+
+
+                <strong>
+                    ${item.pet_name}
+                </strong>
+
+
+                <span>
+
+                    Status:
+                    <b>
+                        ${item.status}
+                    </b>
+
+                </span>
+
+
+
+                <small>
+
+                    ${
+                        new Date(
+                            item.updated_at
+                        )
+                        .toLocaleString()
+                    }
+
+                </small>
+
+
+
+            </div>
+
+
+            `;
+
+
+        }).join("");
 
 }
