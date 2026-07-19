@@ -725,7 +725,8 @@ exports.updatePaymentStatus = (req, res) => {
             db.query(
                 `
                 UPDATE appointments
-                SET payment_status = ?
+                SET payment_status = ?,
+                    payment_date = NOW()
                 WHERE appointment_id = ?
                 `,
                 [payment_status, id],

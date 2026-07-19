@@ -5,6 +5,11 @@ if (!token) {
 
 loadAppointments();
 
+const selectedAppointment =
+new URLSearchParams(window.location.search)
+.get("id");
+
+let allAppointments = [];
 
 async function loadAppointments(){
 
@@ -31,7 +36,11 @@ async function loadAppointments(){
     }
 
     document.getElementById("app").style.display = "block";
-    displayAppointments(data);
+    allAppointments = data;
+
+    displayAppointments(allAppointments);
+
+    initializeFilters();
 
 }
 
@@ -67,7 +76,7 @@ function displayAppointments(appointments){
 
         html += `
 
-        <tr>
+        <tr id="appointment-${app.appointment_id}">
 
             <td>
                 ${app.appointment_id}
@@ -119,7 +128,7 @@ function displayAppointments(appointments){
 
             <td>
 
-                <select
+                <select class="payment-select ${app.payment_status.toLowerCase()}"
                     onchange="changePaymentStatus(${app.appointment_id}, this.value)"
                     ${app.status !== "Completed" ? "disabled" : ""}
                 >
@@ -184,10 +193,140 @@ function displayAppointments(appointments){
 
     table.innerHTML = html;
 
+    if(selectedAppointment){
+
+        const row =
+        document.getElementById(
+            `appointment-${selectedAppointment}`
+        );
+
+
+        if(row){
+
+            row.classList.add("highlight-row");
+
+
+            row.scrollIntoView({
+                behavior:"smooth",
+                block:"center"
+            });
+
+            setTimeout(()=>{
+
+                row.classList.remove("highlight-row");
+
+            },3000);
+
+        }
+
+    }
+    
 
 }
 
+function initializeFilters(){
 
+    const searchInput =
+    document.getElementById("searchInput");
+
+    const statusFilter =
+    document.getElementById("statusFilter");
+
+    const dateFilter =
+    document.getElementById("dateFilter");
+
+    searchInput.oninput = filterAppointments;
+    statusFilter.onchange = filterAppointments;
+    dateFilter.onchange = filterAppointments;
+
+}
+
+function filterAppointments(){
+
+    const search =
+    document.getElementById("searchInput")
+    .value
+    .toLowerCase();
+
+    const status =
+    document.getElementById("statusFilter")
+    .value;
+
+    const date =
+    document.getElementById("dateFilter")
+    .value;
+
+    const today = new Date();
+
+    const filtered = allAppointments.filter(app=>{
+
+        const pet =
+        app.pet_name.toLowerCase();
+
+        const owner =
+        `${app.first_name} ${app.last_name}`.toLowerCase();
+
+        const matchesSearch =
+            pet.includes(search) ||
+            owner.includes(search);
+
+        const matchesStatus =
+            status === "All" ||
+            app.status === status;
+
+        const appDate =
+        new Date(app.start_datetime);
+
+        let matchesDate = true;
+
+        if (dateFilter === "today") {
+
+            const today = new Date();
+
+            filtered = filtered.filter(app => {
+
+                const appDate = new Date(app.start_datetime);
+
+                return (
+                    appDate.getFullYear() === today.getFullYear() &&
+                    appDate.getMonth() === today.getMonth() &&
+                    appDate.getDate() === today.getDate()
+                );
+
+            });
+
+        }
+
+        else if(date==="week"){
+
+            const diff =
+            (appDate - today) /
+            (1000*60*60*24);
+
+            matchesDate =
+            diff>=0 && diff<=7;
+
+        }
+
+        else if(date==="month"){
+
+            matchesDate =
+                appDate.getMonth() === today.getMonth() &&
+                appDate.getFullYear() === today.getFullYear();
+
+        }
+
+        return (
+            matchesSearch &&
+            matchesStatus &&
+            matchesDate
+        );
+
+    });
+
+    displayAppointments(filtered);
+
+}
 
 function formatStatus(status){
 
@@ -275,7 +414,7 @@ async function changeStatus(id,currentStatus){
 
     const response = await fetch(
 
-        `/api/admin/appointments/${id}/status`,
+        `http://localhost:3000/api/admin/appointments/${id}/status`,
 
         {
 
@@ -310,7 +449,7 @@ async function changeStatus(id,currentStatus){
     }
 
 
-    loadAppointments();
+    await loadAppointments();
 
 }
 
@@ -350,15 +489,30 @@ async function cancelAppointment(id){
 
     alert(data.message);
 
-    loadAppointments();
+    await loadAppointments();
 
 }
 
 async function changePaymentStatus(id, paymentStatus){
 
+    const confirmUpdate = confirm(
+        `Change payment status to "${paymentStatus}"?
+
+        This will record the payment date and time.`
+    );
+
+    if(!confirmUpdate){
+
+        // Restore the previous value
+        loadAppointments();
+
+        return;
+
+    }
+
     const response = await fetch(
 
-        `/api/admin/appointments/${id}/payment`,
+        `http://localhost:3000/api/admin/appointments/${id}/payment`,
 
         {
 
@@ -385,8 +539,13 @@ async function changePaymentStatus(id, paymentStatus){
 
         alert(data.message || "Failed to update payment status");
 
+        loadAppointments();
+
         return;
 
     }
 
+    alert("Payment status updated successfully.");
+
+    await loadAppointments();
 }
